@@ -41,7 +41,7 @@
        <item>
         <widget class="QLabel" name="lblCadastros">
          <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
          </property>
          <property name="autoFillBackground">
           <bool>false</bool>
@@ -50,7 +50,7 @@
           <string>Cadastros:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -94,19 +94,25 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line1">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+        <widget class="QPushButton" name="btnMovimentacoes">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Movimentações</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnMovimentacoes">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Movimentações</string>
+        <widget class="Line" name="line1">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -144,7 +150,6 @@
         <font>
          <family>Times New Roman</family>
          <pointsize>40</pointsize>
-         <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
          <kerning>true</kerning>
@@ -154,7 +159,7 @@
         <string>Fortuna</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
       </widget>
      </item>

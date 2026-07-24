@@ -45,6 +45,18 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         tags/TagDialog.h
         tags/TagDialog.cpp
         tags/TagDialog.ui
+        movimentacoes/MovimentacoesWindow.ui
+        movimentacoes/MovimentacoesWindow.cpp
+        movimentacoes/MovimentacoesWindow.h
+        movimentacoes/ReceitaDialog.ui
+        movimentacoes/ReceitaDialog.cpp
+        movimentacoes/ReceitaDialog.h
+        movimentacoes/DespesaDialog.ui
+        movimentacoes/DespesaDialog.cpp
+        movimentacoes/DespesaDialog.h
+        movimentacoes/TransferenciaDialog.ui
+        movimentacoes/TransferenciaDialog.cpp
+        movimentacoes/TransferenciaDialog.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

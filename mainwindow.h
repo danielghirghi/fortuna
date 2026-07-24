@@ -20,6 +20,7 @@ private slots:
 	void on_btnContas_clicked();
 	void on_btnCategorias_clicked();
     void on_btnTags_clicked();
+    void on_btnMovimentacoes_clicked();
 
 private:
 	Ui::MainWindow *ui;
