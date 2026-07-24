@@ -1,8 +1,9 @@
 #include "CategoriasWindow.h"
 #include "ui_CategoriasWindow.h"
 
-CategoriasWindow::CategoriasWindow(QWidget *parent)
-    : QWidget(parent)
+#include "CategoriaDialog.h"
+
+CategoriasWindow::CategoriasWindow(QWidget *parent) : QWidget(parent)
     , ui(new Ui::CategoriasWindow)
 {
     ui->setupUi(this);
@@ -10,7 +11,9 @@ CategoriasWindow::CategoriasWindow(QWidget *parent)
     setWindowTitle("Categorias");
 }
 
-CategoriasWindow::~CategoriasWindow()
-{
-    delete ui;
+CategoriasWindow::~CategoriasWindow(){ delete ui; }
+
+void CategoriasWindow::on_btnNova_clicked(){
+    auto *janela = new CategoriaDialog(nullptr);
+    janela->show();
 }

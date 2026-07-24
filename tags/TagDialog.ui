@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>TagDialog</class>
+ <widget class="QDialog" name="TagDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,10 +29,10 @@
     </rect>
    </property>
    <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+    <enum>Qt::Orientation::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -46,13 +46,19 @@
    </property>
    <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
     <property name="spacing">
-     <number>25</number>
+     <number>6</number>
     </property>
     <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
+     <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
     </property>
     <item>
      <layout class="QFormLayout" name="layFormulario">
+      <property name="horizontalSpacing">
+       <number>10</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>10</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="lblNome">
         <property name="text">
@@ -90,7 +96,7 @@
   <connection>
    <sender>bbTags</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>TagDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -106,7 +112,7 @@
   <connection>
    <sender>bbTags</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>TagDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

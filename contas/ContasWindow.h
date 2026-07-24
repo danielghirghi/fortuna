@@ -4,18 +4,18 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class ContasWindow;
-}
+namespace Ui { class ContasWindow; }
 QT_END_NAMESPACE
 
-class ContasWindow : public QWidget
-{
+class ContasWindow : public QWidget {
     Q_OBJECT
 
 public:
     explicit ContasWindow(QWidget *parent = nullptr);
     ~ContasWindow();
+
+private slots:
+    void on_btnNova_clicked();
 
 private:
     Ui::ContasWindow *ui;

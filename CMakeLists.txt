@@ -27,10 +27,24 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         mainwindow.ui
-        categorias/CategoriaDialog.ui categorias/CategoriasWindow.cpp categorias/CategoriasWindow.h categorias/CategoriasWindow.ui
-        contas/ContaDialog.ui contas/ContasWindow.cpp contas/ContasWindow.h contas/ContasWindow.ui
-        tags/TagDialog.ui tags/TagsWindow.cpp tags/TagsWindow.h tags/TagsWindow.ui
-        tags/TagDialog.ui tags/TagsWindow.cpp tags/TagsWindow.h tags/TagsWindow.ui
+        categorias/CategoriasWindow.cpp
+        categorias/CategoriasWindow.h
+        categorias/CategoriasWindow.ui
+        categorias/CategoriaDialog.h
+        categorias/CategoriaDialog.cpp
+        categorias/CategoriaDialog.ui
+        contas/ContasWindow.cpp
+        contas/ContasWindow.h
+        contas/ContasWindow.ui
+        contas/ContaDialog.h
+        contas/ContaDialog.cpp
+        contas/ContaDialog.ui
+        tags/TagsWindow.h
+        tags/TagsWindow.cpp
+        tags/TagsWindow.ui
+        tags/TagDialog.h
+        tags/TagDialog.cpp
+        tags/TagDialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

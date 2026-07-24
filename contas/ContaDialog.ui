@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>ContaDialog</class>
+ <widget class="QDialog" name="ContaDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,10 +35,10 @@
     </rect>
    </property>
    <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+    <enum>Qt::Orientation::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -55,12 +55,12 @@
      <number>0</number>
     </property>
     <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
+     <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
     </property>
     <item>
      <layout class="QFormLayout" name="layFormulario">
       <property name="formAlignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
       </property>
       <property name="horizontalSpacing">
        <number>10</number>
@@ -115,7 +115,7 @@
   <connection>
    <sender>bbConta</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ContaDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -131,7 +131,7 @@
   <connection>
    <sender>bbConta</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ContaDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

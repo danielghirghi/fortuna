@@ -56,7 +56,7 @@
     <item>
      <layout class="QHBoxLayout" name="layFerramentas">
       <item>
-       <widget class="QPushButton" name="btnExcluir">
+       <widget class="QPushButton" name="btnNova">
         <property name="text">
          <string>Nova</string>
         </property>
@@ -70,7 +70,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnNova">
+       <widget class="QPushButton" name="btnExcluir">
         <property name="text">
          <string>Excluir</string>
         </property>
@@ -79,7 +79,7 @@
       <item>
        <spacer name="spacer">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Orientation::Horizontal</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
