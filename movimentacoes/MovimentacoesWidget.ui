@@ -99,7 +99,46 @@
      </layout>
     </item>
     <item>
-     <widget class="QTableView" name="tblContas"/>
+     <widget class="QTableWidget" name="tblMovimentacoes">
+      <property name="columnCount">
+       <number>7</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Data</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Valor</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Descrição</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tipo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Conta Origem</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Conta Destino</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Categoria</string>
+       </property>
+      </column>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblQuantidade">

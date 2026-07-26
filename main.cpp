@@ -3,6 +3,10 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QMessageBox>
+
+#include "database/Database.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -10,13 +14,21 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
+    for (const QString &locale : uiLanguages)
+    {
         const QString baseName = "fortuna_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
+        if (translator.load(":/i18n/" + baseName))
+        {
             a.installTranslator(&translator);
             break;
         }
     }
+
+    if (!Database::instance().connect()) {
+        QMessageBox::critical(nullptr, "Erro", "Não foi possível conectar ao banco de dados.");
+        return -1;
+    }
+
     MainWindow w;
     w.show();
     return a.exec();

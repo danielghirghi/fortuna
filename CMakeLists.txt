@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Sql)
 
 set(TS_FILES fortuna_pt_BR.ts)
 
@@ -57,6 +57,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         movimentacoes/TransferenciaWidget.ui
         movimentacoes/TransferenciaWidget.cpp
         movimentacoes/TransferenciaWidget.h
+        database/Database.h
+        database/Database.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -80,7 +82,7 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(fortuna PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(fortuna PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt6::Sql)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

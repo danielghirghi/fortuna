@@ -7,7 +7,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class CategoriasWidget; }
 QT_END_NAMESPACE
 
-class CategoriasWidget : public QWidget {
+class CategoriasWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -16,6 +17,7 @@ public:
 
 private slots:
     void on_btnNova_clicked();
+    void carregarCategorias();
 
 private:
     Ui::CategoriasWidget *ui;

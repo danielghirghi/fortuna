@@ -99,7 +99,26 @@
      </layout>
     </item>
     <item>
-     <widget class="QTableView" name="tblContas"/>
+     <widget class="QTableWidget" name="tblTags">
+      <property name="columnCount">
+       <number>3</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cor</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ativo</string>
+       </property>
+      </column>
+     </widget>
     </item>
     <item>
      <widget class="QLabel" name="lblQuantidade">

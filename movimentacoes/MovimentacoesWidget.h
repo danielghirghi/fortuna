@@ -7,7 +7,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MovimentacoesWidget; }
 QT_END_NAMESPACE
 
-class MovimentacoesWidget : public QWidget {
+class MovimentacoesWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -15,6 +16,7 @@ public:
     ~MovimentacoesWidget();
 
 private slots:
+    void carregarMovimentacoes();
     void abrirReceita();
     void abrirDespesa();
     void abrirTransferencia();

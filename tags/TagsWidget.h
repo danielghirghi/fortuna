@@ -7,7 +7,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class TagsWidget; }
 QT_END_NAMESPACE
 
-class TagsWidget : public QWidget {
+class TagsWidget : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -16,6 +17,7 @@ public:
 
 private slots:
     void on_btnNova_clicked();
+    void carregarTags();
 
 private:
     Ui::TagsWidget *ui;
