@@ -14,6 +14,9 @@ public:
     explicit DespesaWidget(QWidget *parent = nullptr);
     ~DespesaWidget();
 
+private slots:
+    void salvar();
+
 private:
     Ui::DespesaWidget *ui;
 };

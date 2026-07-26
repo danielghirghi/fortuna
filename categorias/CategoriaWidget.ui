@@ -80,7 +80,21 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QComboBox" name="cmbTipo"/>
+       <widget class="QComboBox" name="cmbTipo">
+        <property name="placeholderText">
+         <string>...</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>RENDA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>DESPESA</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="lblGrupo">
@@ -90,7 +104,66 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QComboBox" name="cmbGrupo"/>
+       <widget class="QComboBox" name="cmbGrupo">
+        <property name="placeholderText">
+         <string>...</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Variável</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fixa</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Alimentação</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Cuidado Pessoal</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Esportes</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bugigangas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Cursos</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Valores Obrigatórios</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Investimentos</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Viagens</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Outros</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="chkAtiva">

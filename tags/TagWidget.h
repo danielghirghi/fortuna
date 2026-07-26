@@ -7,12 +7,16 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class TagWidget; }
 QT_END_NAMESPACE
 
-class TagWidget : public QDialog {
+class TagWidget : public QDialog
+{
     Q_OBJECT
 
 public:
     explicit TagWidget(QWidget *parent = nullptr);
     ~TagWidget();
+
+private slots:
+    void salvar();
 
 private:
     Ui::TagWidget *ui;

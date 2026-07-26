@@ -14,6 +14,9 @@ public:
     explicit TransferenciaWidget(QWidget *parent = nullptr);
     ~TransferenciaWidget();
 
+private slots:
+    void salvar();
+
 private:
     Ui::TransferenciaWidget *ui;
 };

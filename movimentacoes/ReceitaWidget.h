@@ -14,6 +14,9 @@ public:
     explicit ReceitaWidget(QWidget *parent = nullptr);
     ~ReceitaWidget();
 
+private slots:
+    void salvar();
+
 private:
     Ui::ReceitaWidget *ui;
 };

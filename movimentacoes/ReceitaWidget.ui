@@ -97,7 +97,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="bbRenda">
+  <widget class="QDialogButtonBox" name="bbReceita">
    <property name="geometry">
     <rect>
      <x>10</x>

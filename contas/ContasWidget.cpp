@@ -25,6 +25,8 @@ void ContasWidget::on_btnNova_clicked()
     auto *janela = new ContaWidget(nullptr);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
+
+    if (janela->exec() == QDialog::Accepted) { carregarContas(); }
 }
 
 void ContasWidget::carregarContas()

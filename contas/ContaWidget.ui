@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>178</height>
+    <height>258</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -25,29 +25,13 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <widget class="QDialogButtonBox" name="bbConta">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>140</y>
-     <width>301</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
      <width>301</width>
-     <height>136</height>
+     <height>200</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
@@ -88,7 +72,7 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="edtBanco"/>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QLabel" name="lblSaldoInicial">
         <property name="text">
          <string>Saldo Inicial:</string>
@@ -96,53 +80,60 @@
        </widget>
       </item>
       <item row="3" column="1">
+       <widget class="QDoubleSpinBox" name="spnSaldoInicial"/>
+      </item>
+      <item row="4" column="1">
        <widget class="QCheckBox" name="chkAtiva">
         <property name="text">
          <string>Conta Ativa</string>
         </property>
        </widget>
       </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Tipo:</string>
+        </property>
+       </widget>
+      </item>
       <item row="2" column="1">
-       <widget class="QDoubleSpinBox" name="edtSaldoInicial"/>
+       <widget class="QComboBox" name="cmbTipo">
+        <property name="placeholderText">
+         <string>...</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Corrente</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Investimento</string>
+         </property>
+        </item>
+       </widget>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
+  <widget class="QDialogButtonBox" name="bbConta">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>301</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Orientation::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>bbConta</sender>
-   <signal>accepted()</signal>
-   <receiver>ContaWidget</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>bbConta</sender>
-   <signal>rejected()</signal>
-   <receiver>ContaWidget</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

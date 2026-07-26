@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="bbTags">
+  <widget class="QDialogButtonBox" name="bbTag">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -94,7 +94,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>bbTags</sender>
+   <sender>bbTag</sender>
    <signal>accepted()</signal>
    <receiver>TagWidget</receiver>
    <slot>accept()</slot>
@@ -110,7 +110,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>bbTags</sender>
+   <sender>bbTag</sender>
    <signal>rejected()</signal>
    <receiver>TagWidget</receiver>
    <slot>reject()</slot>

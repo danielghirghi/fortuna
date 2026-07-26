@@ -62,18 +62,24 @@ void MovimentacoesWidget::abrirReceita() {
     auto *janela = new ReceitaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
+
+    if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
 
 void MovimentacoesWidget::abrirDespesa() {
     auto *janela = new DespesaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
+
+    if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
 
 void MovimentacoesWidget::abrirTransferencia() {
     auto *janela = new TransferenciaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
+
+    if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
 
 MovimentacoesWidget::~MovimentacoesWidget() { delete ui; }

@@ -7,12 +7,16 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class CategoriaWidget; }
 QT_END_NAMESPACE
 
-class CategoriaWidget : public QDialog {
+class CategoriaWidget : public QDialog
+{
     Q_OBJECT
 
 public:
     explicit CategoriaWidget(QWidget *parent = nullptr);
     ~CategoriaWidget();
+
+private slots:
+    void salvar();
 
 private:
     Ui::CategoriaWidget *ui;
