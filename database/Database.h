@@ -4,12 +4,13 @@
 #include <QSqlDatabase>
 #include <QString>
 
+// Não cria a database nem as tabelas, por enquanto ele assume que o banco e as tabelas já existem
 class Database
 {
 public:
     static Database& instance();
 
-    bool connect(const QString &path = "/tmp/finance.db");
+    bool connect();
     void disconnect();
     bool isOpen() const;
 
