@@ -1,10 +1,10 @@
-#include "MainWindow.h"
-#include "movimentacoes/MovimentacoesWindow.h"
-#include "ui_MainWindow.h"
+#include "mainwindow.h"
+#include "movimentacoes/MovimentacoesWidget.h"
+#include "ui_mainwindow.h"
 
-#include "contas/ContasWindow.h"
-#include "categorias/CategoriasWindow.h"
-#include "tags/TagsWindow.h"
+#include "contas/ContasWidget.h"
+#include "categorias/CategoriasWidget.h"
+#include "tags/TagsWidget.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -14,22 +14,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow(){ delete ui; }
 
 void MainWindow::on_btnContas_clicked(){
-    auto *janela = new ContasWindow(nullptr);
+    auto *janela = new ContasWidget(nullptr);
     janela->show();
 }
 
 void MainWindow::on_btnCategorias_clicked(){
-    auto *janela = new CategoriasWindow(nullptr);
+    auto *janela = new CategoriasWidget(nullptr);
     janela->show();
 }
 
 void MainWindow::on_btnTags_clicked(){
-    auto *janela = new TagsWindow(nullptr);
+    auto *janela = new TagsWidget(nullptr);
     janela->show();
 }
 
 void MainWindow::on_btnMovimentacoes_clicked(){
-    auto *janela = new MovimentacoesWindow(nullptr);
+    auto *janela = new MovimentacoesWidget(nullptr);
     janela->show();
 }
 

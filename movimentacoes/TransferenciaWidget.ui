@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ReceitaDialog</class>
- <widget class="QDialog" name="ReceitaDialog">
+ <class>TransferenciaWidget</class>
+ <widget class="QDialog" name="TransferenciaWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -71,16 +71,16 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="lblDestino">
+       <widget class="QLabel" name="lblOrigem">
         <property name="text">
-         <string>Conta Destino: </string>
+         <string>Conta Origem: </string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="lblCategoria">
+       <widget class="QLabel" name="lblDestino">
         <property name="text">
-         <string>Categoria: </string>
+         <string>Conta Destino:</string>
         </property>
        </widget>
       </item>
@@ -88,10 +88,10 @@
        <widget class="QLineEdit" name="edtDescricao"/>
       </item>
       <item row="3" column="1">
-       <widget class="QComboBox" name="cmbDestino"/>
+       <widget class="QComboBox" name="cmbOrigem"/>
       </item>
       <item row="4" column="1">
-       <widget class="QComboBox" name="cmbCategoria"/>
+       <widget class="QComboBox" name="cmbDestino"/>
       </item>
      </layout>
     </item>

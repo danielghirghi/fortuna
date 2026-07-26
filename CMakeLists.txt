@@ -27,36 +27,36 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         mainwindow.ui
-        categorias/CategoriasWindow.cpp
-        categorias/CategoriasWindow.h
-        categorias/CategoriasWindow.ui
-        categorias/CategoriaDialog.h
-        categorias/CategoriaDialog.cpp
-        categorias/CategoriaDialog.ui
-        contas/ContasWindow.cpp
-        contas/ContasWindow.h
-        contas/ContasWindow.ui
-        contas/ContaDialog.h
-        contas/ContaDialog.cpp
-        contas/ContaDialog.ui
-        tags/TagsWindow.h
-        tags/TagsWindow.cpp
-        tags/TagsWindow.ui
-        tags/TagDialog.h
-        tags/TagDialog.cpp
-        tags/TagDialog.ui
-        movimentacoes/MovimentacoesWindow.ui
-        movimentacoes/MovimentacoesWindow.cpp
-        movimentacoes/MovimentacoesWindow.h
-        movimentacoes/ReceitaDialog.ui
-        movimentacoes/ReceitaDialog.cpp
-        movimentacoes/ReceitaDialog.h
-        movimentacoes/DespesaDialog.ui
-        movimentacoes/DespesaDialog.cpp
-        movimentacoes/DespesaDialog.h
-        movimentacoes/TransferenciaDialog.ui
-        movimentacoes/TransferenciaDialog.cpp
-        movimentacoes/TransferenciaDialog.h
+        categorias/CategoriasWidget.cpp
+        categorias/CategoriasWidget.h
+        categorias/CategoriasWidget.ui
+        categorias/CategoriaWidget.h
+        categorias/CategoriaWidget.cpp
+        categorias/CategoriaWidget.ui
+        contas/ContasWidget.cpp
+        contas/ContasWidget.h
+        contas/ContasWidget.ui
+        contas/ContaWidget.h
+        contas/ContaWidget.cpp
+        contas/ContaWidget.ui
+        tags/TagsWidget.h
+        tags/TagsWidget.cpp
+        tags/TagsWidget.ui
+        tags/TagWidget.h
+        tags/TagWidget.cpp
+        tags/TagWidget.ui
+        movimentacoes/MovimentacoesWidget.ui
+        movimentacoes/MovimentacoesWidget.cpp
+        movimentacoes/MovimentacoesWidget.h
+        movimentacoes/ReceitaWidget.ui
+        movimentacoes/ReceitaWidget.cpp
+        movimentacoes/ReceitaWidget.h
+        movimentacoes/DespesaWidget.ui
+        movimentacoes/DespesaWidget.cpp
+        movimentacoes/DespesaWidget.h
+        movimentacoes/TransferenciaWidget.ui
+        movimentacoes/TransferenciaWidget.cpp
+        movimentacoes/TransferenciaWidget.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
