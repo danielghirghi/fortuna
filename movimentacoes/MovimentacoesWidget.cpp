@@ -39,7 +39,7 @@ void MovimentacoesWidget::carregarMovimentacoes()
     ui->tblMovimentacoes->setRowCount(0);
 
     QSqlQuery query(Database::instance().db());
-    if (!query.exec("SELECT data, valor, descricao, tipo, conta_origem_id, conta_destino_id, categoria_id FROM movimentacoes ORDER BY data")) {
+    if (!query.exec("SELECT m.id, m.data, m.descricao, co.nome AS conta_origem, cd.nome AS conta_destino, cat.nome AS categoria, m.valor, m.tipo AS tipo FROM movimentacoes m LEFT JOIN contas co ON co.id = m.conta_origem_id LEFT JOIN contas cd ON cd.id = m.conta_destino_id LEFT JOIN categorias cat ON cat.id = m.categoria_id ORDER BY m.data DESC")) {
         QMessageBox::warning(this, "Erro", "Falha ao carregar Movimentações: " + query.lastError().text());
         return;
     }
@@ -51,9 +51,9 @@ void MovimentacoesWidget::carregarMovimentacoes()
         ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(query.value("valor").toString()));
         ui->tblMovimentacoes->setItem(row, 2, new QTableWidgetItem(query.value("descricao").toString()));
         ui->tblMovimentacoes->setItem(row, 3, new QTableWidgetItem(query.value("tipo").toString()));
-        ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(query.value("conta_origem_id").toString()));
-        ui->tblMovimentacoes->setItem(row, 5, new QTableWidgetItem(query.value("conta_destino_id").toString()));
-        ui->tblMovimentacoes->setItem(row, 6, new QTableWidgetItem(query.value("categoria_id").toString()));
+        ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(query.value("conta_origem").toString()));
+        ui->tblMovimentacoes->setItem(row, 5, new QTableWidgetItem(query.value("conta_destino").toString()));
+        ui->tblMovimentacoes->setItem(row, 6, new QTableWidgetItem(query.value("categoria").toString()));
         row++;
     }
 }

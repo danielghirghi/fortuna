@@ -6,7 +6,6 @@
 #include <QMessageBox>
 
 #include "database/Database.h"
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {
