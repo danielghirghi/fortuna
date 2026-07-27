@@ -110,8 +110,13 @@
        <bool>true</bool>
       </property>
       <property name="columnCount">
-       <number>7</number>
+       <number>8</number>
       </property>
+      <column>
+       <property name="text">
+        <string>id</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>Data</string>

@@ -16,8 +16,9 @@ public:
     ~ContasWidget();
 
 private slots:
-    void on_btnNova_clicked();
     void carregarContas();
+    void on_btnNova_clicked();
+    void on_btnEditar_clicked();
 
 private:
     Ui::ContasWidget *ui;

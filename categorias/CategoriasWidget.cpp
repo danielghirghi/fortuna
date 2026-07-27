@@ -16,9 +16,35 @@ CategoriasWidget::CategoriasWidget(QWidget *parent) : QWidget(parent)
     setWindowTitle("Categorias");
 
     carregarCategorias();
+
+    ui->tblCategorias->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblCategorias->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 CategoriasWidget::~CategoriasWidget(){ delete ui; }
+
+void CategoriasWidget::carregarCategorias()
+{
+    ui->tblCategorias->setRowCount(0);
+
+    QSqlQuery query(Database::instance().db());
+    if (!query.exec("SELECT id, nome, grupo, tipo, ativo FROM categorias ORDER BY nome")) {
+        QMessageBox::warning(this, "Erro", "Falha ao carregar categorias: " + query.lastError().text());
+        return;
+    }
+
+    int row = 0;
+    while (query.next()) {
+        ui->tblCategorias->insertRow(row);
+        ui->tblCategorias->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
+        ui->tblCategorias->setItem(row, 1, new QTableWidgetItem(query.value("nome").toString()));
+        ui->tblCategorias->setItem(row, 2, new QTableWidgetItem(query.value("grupo").toString()));
+        ui->tblCategorias->setItem(row, 3, new QTableWidgetItem(query.value("tipo").toString()));
+        ui->tblCategorias->setItem(row, 4, new QTableWidgetItem(query.value("ativo").toString()));
+        row++;
+    }
+    ui->tblCategorias->setColumnHidden(0,true);
+}
 
 void CategoriasWidget::on_btnNova_clicked(){
     auto *janela = new CategoriaWidget(nullptr);
@@ -28,23 +54,20 @@ void CategoriasWidget::on_btnNova_clicked(){
     if (janela->exec() == QDialog::Accepted) { carregarCategorias(); }
 }
 
-void CategoriasWidget::carregarCategorias()
+void CategoriasWidget::on_btnEditar_clicked()
 {
-    ui->tblCategorias->setRowCount(0);
+    QModelIndex index = ui->tblCategorias->currentIndex();
 
-    QSqlQuery query(Database::instance().db());
-    if (!query.exec("SELECT nome, grupo, tipo, ativo FROM categorias ORDER BY nome")) {
-        QMessageBox::warning(this, "Erro", "Falha ao carregar categorias: " + query.lastError().text());
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Categoria", "Selecione uma categoria.");
         return;
     }
 
-    int row = 0;
-    while (query.next()) {
-        ui->tblCategorias->insertRow(row);
-        ui->tblCategorias->setItem(row, 0, new QTableWidgetItem(query.value("nome").toString()));
-        ui->tblCategorias->setItem(row, 1, new QTableWidgetItem(query.value("grupo").toString()));
-        ui->tblCategorias->setItem(row, 2, new QTableWidgetItem(query.value("tipo").toString()));
-        ui->tblCategorias->setItem(row, 3, new QTableWidgetItem(query.value("ativo").toString()));
-        row++;
-    }
+    int linha = index.row();
+    int id = ui->tblCategorias->item(linha, 0)->text().toInt();
+
+    CategoriaWidget dlg(this);
+    dlg.setId(id);
+    if (dlg.exec() == QDialog::Accepted) { carregarCategorias(); }
 }

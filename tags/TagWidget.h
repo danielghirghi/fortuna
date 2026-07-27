@@ -14,11 +14,16 @@ class TagWidget : public QDialog
 public:
     explicit TagWidget(QWidget *parent = nullptr);
     ~TagWidget();
+    void setId(int id);
 
 private slots:
     void salvar();
+    void inserirTag();
+    void atualizarTag();
 
 private:
+    int m_id = -1;
+    void carregarTag();
     Ui::TagWidget *ui;
 };
 

@@ -14,11 +14,16 @@ class ContaWidget : public QDialog
 public:
     explicit ContaWidget(QWidget *parent = nullptr);
     ~ContaWidget();
+    void setId(int id);
 
 private slots:
     void salvar();
+    void inserirConta();
+    void atualizarConta();
 
 private:
+    int m_id = -1;
+    void carregarConta();
     Ui::ContaWidget *ui;
 };
 

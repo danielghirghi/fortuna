@@ -32,6 +32,9 @@ MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : QWidget(parent)
     setWindowTitle("Movimentações");
 
     carregarMovimentacoes();
+
+    ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblMovimentacoes->setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 void MovimentacoesWidget::carregarMovimentacoes()
@@ -47,22 +50,23 @@ void MovimentacoesWidget::carregarMovimentacoes()
     int row = 0;
     while (query.next()) {
         ui->tblMovimentacoes->insertRow(row);
-        ui->tblMovimentacoes->setItem(row, 0, new QTableWidgetItem(query.value("data").toString()));
-        ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(query.value("valor").toString()));
-        ui->tblMovimentacoes->setItem(row, 2, new QTableWidgetItem(query.value("descricao").toString()));
-        ui->tblMovimentacoes->setItem(row, 3, new QTableWidgetItem(query.value("tipo").toString()));
-        ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(query.value("conta_origem").toString()));
-        ui->tblMovimentacoes->setItem(row, 5, new QTableWidgetItem(query.value("conta_destino").toString()));
-        ui->tblMovimentacoes->setItem(row, 6, new QTableWidgetItem(query.value("categoria").toString()));
+        ui->tblMovimentacoes->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
+        ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(query.value("data").toString()));
+        ui->tblMovimentacoes->setItem(row, 2, new QTableWidgetItem(query.value("valor").toString()));
+        ui->tblMovimentacoes->setItem(row, 3, new QTableWidgetItem(query.value("descricao").toString()));
+        ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(query.value("tipo").toString()));
+        ui->tblMovimentacoes->setItem(row, 5, new QTableWidgetItem(query.value("conta_origem").toString()));
+        ui->tblMovimentacoes->setItem(row, 6, new QTableWidgetItem(query.value("conta_destino").toString()));
+        ui->tblMovimentacoes->setItem(row, 7, new QTableWidgetItem(query.value("categoria").toString()));
         row++;
     }
+    ui->tblMovimentacoes->setColumnHidden(0,true);
 }
 
 void MovimentacoesWidget::abrirReceita() {
     auto *janela = new ReceitaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
-
     if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
 
@@ -70,7 +74,6 @@ void MovimentacoesWidget::abrirDespesa() {
     auto *janela = new DespesaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
-
     if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
 
@@ -78,8 +81,38 @@ void MovimentacoesWidget::abrirTransferencia() {
     auto *janela = new TransferenciaWidget(this);
     janela->setAttribute(Qt::WA_DeleteOnClose);
     janela->show();
-
     if (janela->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+}
+
+void MovimentacoesWidget::on_btnEditar_clicked()
+{
+    QModelIndex index = ui->tblMovimentacoes->currentIndex();
+
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Movimentação", "Selecione uma Movimentação.");
+        return;
+    }
+
+    int linha = index.row();
+    int id = ui->tblMovimentacoes->item(linha, 0)->text().toInt();
+
+    auto tipo = ui->tblMovimentacoes->item(linha, 4)->text();
+    if (tipo == "DESPESA"){
+        DespesaWidget dlg(this);
+        dlg.setId(id);
+        if (dlg.exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+    }
+    if (tipo == "RENDA"){
+        ReceitaWidget dlg(this);
+        dlg.setId(id);
+        if (dlg.exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+    }
+    if (tipo == "TRANSFERENCIA"){
+        TransferenciaWidget dlg(this);
+        dlg.setId(id);
+        if (dlg.exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+    }
 }
 
 MovimentacoesWidget::~MovimentacoesWidget() { delete ui; }

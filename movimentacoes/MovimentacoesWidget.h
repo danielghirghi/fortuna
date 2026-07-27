@@ -20,6 +20,7 @@ private slots:
     void abrirReceita();
     void abrirDespesa();
     void abrirTransferencia();
+    void on_btnEditar_clicked();
 
 private:
     Ui::MovimentacoesWidget *ui;

@@ -14,11 +14,16 @@ class CategoriaWidget : public QDialog
 public:
     explicit CategoriaWidget(QWidget *parent = nullptr);
     ~CategoriaWidget();
+    void setId(int id);
 
 private slots:
     void salvar();
+    void inserirCategoria();
+    void atualizarCategoria();
 
 private:
+    int m_id = -1;
+    void carregarCategoria();
     Ui::CategoriaWidget *ui;
 };
 

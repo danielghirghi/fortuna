@@ -16,8 +16,9 @@ public:
     ~TagsWidget();
 
 private slots:
-    void on_btnNova_clicked();
     void carregarTags();
+    void on_btnNova_clicked();
+    void on_btnEditar_clicked();
 
 private:
     Ui::TagsWidget *ui;

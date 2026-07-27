@@ -7,17 +7,23 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class TransferenciaWidget; }
 QT_END_NAMESPACE
 
-class TransferenciaWidget : public QDialog {
+class TransferenciaWidget : public QDialog
+{
     Q_OBJECT
 
 public:
     explicit TransferenciaWidget(QWidget *parent = nullptr);
     ~TransferenciaWidget();
+    void setId(int id);
 
 private slots:
     void salvar();
+    void inserirTransferencia();
+    void atualizarTransferencia();
 
 private:
+    int m_id = -1;
+    void carregarTransferencia();
     Ui::TransferenciaWidget *ui;
 };
 

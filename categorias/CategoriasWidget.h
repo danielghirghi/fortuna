@@ -16,8 +16,9 @@ public:
     ~CategoriasWidget();
 
 private slots:
-    void on_btnNova_clicked();
     void carregarCategorias();
+    void on_btnNova_clicked();
+    void on_btnEditar_clicked();
 
 private:
     Ui::CategoriasWidget *ui;

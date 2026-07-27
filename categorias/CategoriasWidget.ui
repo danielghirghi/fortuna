@@ -101,8 +101,13 @@
     <item>
      <widget class="QTableWidget" name="tblCategorias">
       <property name="columnCount">
-       <number>4</number>
+       <number>5</number>
       </property>
+      <column>
+       <property name="text">
+        <string>id</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>Nome</string>
