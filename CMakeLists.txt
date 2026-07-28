@@ -33,18 +33,27 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         categorias/CategoriaWidget.h
         categorias/CategoriaWidget.cpp
         categorias/CategoriaWidget.ui
+        categorias/CategoriaConfirmDialog.h
+        categorias/CategoriaConfirmDialog.cpp
+        categorias/CategoriaConfirmDialog.ui
         contas/ContasWidget.cpp
         contas/ContasWidget.h
         contas/ContasWidget.ui
         contas/ContaWidget.h
         contas/ContaWidget.cpp
         contas/ContaWidget.ui
+        contas/ContaConfirmDialog.ui
+        contas/ContaConfirmDialog.h
+        contas/ContaConfirmDialog.cpp
         tags/TagsWidget.h
         tags/TagsWidget.cpp
         tags/TagsWidget.ui
         tags/TagWidget.h
         tags/TagWidget.cpp
         tags/TagWidget.ui
+        tags/TagConfirmDialog.h
+        tags/TagConfirmDialog.cpp
+        tags/TagConfirmDialog.ui
         movimentacoes/MovimentacoesWidget.ui
         movimentacoes/MovimentacoesWidget.cpp
         movimentacoes/MovimentacoesWidget.h
@@ -57,6 +66,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         movimentacoes/TransferenciaWidget.ui
         movimentacoes/TransferenciaWidget.cpp
         movimentacoes/TransferenciaWidget.h
+        movimentacoes/MovimentacaoConfirmDialog.h
+        movimentacoes/MovimentacaoConfirmDialog.cpp
+        movimentacoes/MovimentacaoConfirmDialog.ui
         database/Database.h
         database/Database.cpp
     )

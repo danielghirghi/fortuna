@@ -2,6 +2,7 @@
 
 #include "MovimentacoesWidget.h"
 #include "ui_MovimentacoesWidget.h"
+#include "MovimentacaoConfirmDialog.h"
 
 #include "ReceitaWidget.h"
 #include "DespesaWidget.h"
@@ -36,6 +37,8 @@ MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : QWidget(parent)
     ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tblMovimentacoes->setSelectionMode(QAbstractItemView::SingleSelection);
 }
+
+MovimentacoesWidget::~MovimentacoesWidget() { delete ui; }
 
 void MovimentacoesWidget::carregarMovimentacoes()
 {
@@ -115,5 +118,21 @@ void MovimentacoesWidget::on_btnEditar_clicked()
     }
 }
 
-MovimentacoesWidget::~MovimentacoesWidget() { delete ui; }
+void MovimentacoesWidget::on_btnExcluir_clicked()
+{
+    QModelIndex index = ui->tblMovimentacoes->currentIndex();
+
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Movimentação", "Selecione uma movimentação.");
+        return;
+    }
+
+    int linha = index.row();
+    int id = ui->tblMovimentacoes->item(linha, 0)->text().toInt();
+
+    MovimentacaoConfirmDialog dlg(this);
+    dlg.setId(id);
+    if (dlg.exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+}
 

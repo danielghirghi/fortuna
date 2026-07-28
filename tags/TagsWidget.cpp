@@ -1,6 +1,7 @@
 #include "TagsWidget.h"
 #include "ui_TagsWidget.h"
 #include "TagWidget.h"
+#include "TagConfirmDialog.h"
 
 #include <QSqlQuery>
 #include "../database/Database.h"
@@ -68,4 +69,22 @@ void TagsWidget::on_btnEditar_clicked()
     TagWidget dlg(this);
     dlg.setId(id);
     if (dlg.exec() == QDialog::Accepted){ carregarTags(); }
+}
+
+void TagsWidget::on_btnExcluir_clicked()
+{
+    QModelIndex index = ui->tblTags->currentIndex();
+
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Tag", "Selecione uma tag.");
+        return;
+    }
+
+    int linha = index.row();
+    int id = ui->tblTags->item(linha, 0)->text().toInt();
+
+    TagConfirmDialog dlg(this);
+    dlg.setId(id);
+    if (dlg.exec() == QDialog::Accepted) { carregarTags(); }
 }

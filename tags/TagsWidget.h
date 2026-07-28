@@ -19,6 +19,7 @@ private slots:
     void carregarTags();
     void on_btnNova_clicked();
     void on_btnEditar_clicked();
+    void on_btnExcluir_clicked();
 
 private:
     Ui::TagsWidget *ui;

@@ -21,6 +21,7 @@ private slots:
     void abrirDespesa();
     void abrirTransferencia();
     void on_btnEditar_clicked();
+    void on_btnExcluir_clicked();
 
 private:
     Ui::MovimentacoesWidget *ui;

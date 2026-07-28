@@ -19,6 +19,7 @@ private slots:
     void carregarCategorias();
     void on_btnNova_clicked();
     void on_btnEditar_clicked();
+    void on_btnExcluir_clicked();
 
 private:
     Ui::CategoriasWidget *ui;

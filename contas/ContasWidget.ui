@@ -135,6 +135,13 @@
       </column>
      </widget>
     </item>
+    <item>
+     <widget class="QLabel" name="lblQuantidade">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

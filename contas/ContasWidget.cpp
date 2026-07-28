@@ -1,6 +1,7 @@
 #include "ContasWidget.h"
 #include "ui_ContasWidget.h"
 #include "ContaWidget.h"
+#include "ContaConfirmDialog.h"
 
 #include <QSqlQuery>
 #include "../database/Database.h"
@@ -72,3 +73,22 @@ void ContasWidget::on_btnEditar_clicked()
     dlg.setId(id);
     if (dlg.exec() == QDialog::Accepted) { carregarContas(); }
 }
+
+void ContasWidget::on_btnExcluir_clicked()
+{
+    QModelIndex index = ui->tblContas->currentIndex();
+
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Conta", "Selecione uma conta.");
+        return;
+    }
+
+    int linha = index.row();
+    int id = ui->tblContas->item(linha, 0)->text().toInt();
+
+    ContaConfirmDialog dlg(this);
+    dlg.setId(id);
+    if (dlg.exec() == QDialog::Accepted) { carregarContas(); }
+}
+

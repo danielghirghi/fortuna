@@ -1,6 +1,7 @@
 #include "CategoriasWidget.h"
 #include "ui_CategoriasWidget.h"
 #include "CategoriaWidget.h"
+#include "CategoriaConfirmDialog.h"
 
 #include <QSqlQuery>
 #include "../database/Database.h"
@@ -68,6 +69,24 @@ void CategoriasWidget::on_btnEditar_clicked()
     int id = ui->tblCategorias->item(linha, 0)->text().toInt();
 
     CategoriaWidget dlg(this);
+    dlg.setId(id);
+    if (dlg.exec() == QDialog::Accepted) { carregarCategorias(); }
+}
+
+void CategoriasWidget::on_btnExcluir_clicked()
+{
+    QModelIndex index = ui->tblCategorias->currentIndex();
+
+    if (!index.isValid())
+    {
+        QMessageBox::warning(this, "Conta", "Selecione uma conta.");
+        return;
+    }
+
+    int linha = index.row();
+    int id = ui->tblCategorias->item(linha, 0)->text().toInt();
+
+    CategoriaConfirmDialog dlg(this);
     dlg.setId(id);
     if (dlg.exec() == QDialog::Accepted) { carregarCategorias(); }
 }
