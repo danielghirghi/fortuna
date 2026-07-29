@@ -1,10 +1,9 @@
 #include "ContasWidget.h"
 #include "ui_ContasWidget.h"
 #include "ContaWidget.h"
-#include "ContaConfirmDialog.h"
+#include "../repositories/ContasRepository.h"
 
 #include <QSqlQuery>
-#include "../database/Database.h"
 
 #include <QMessageBox>
 #include <QSqlError>
@@ -28,32 +27,39 @@ void ContasWidget::carregarContas()
 {
     ui->tblContas->setRowCount(0);
 
-    QSqlQuery query(Database::instance().db());
-    if (!query.exec("SELECT id, nome, tipo, banco, saldo_inicial, ativo FROM contas ORDER BY nome")) {
-        QMessageBox::warning(this, "Erro", "Falha ao carregar contas: " + query.lastError().text());
+    ContasRepository repository;
+    QList<Conta> contas = repository.listar();
+
+    if (!repository.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
         return;
     }
 
     int row = 0;
-    while (query.next()) {
+
+    for (const Conta &conta : contas)
+    {
         ui->tblContas->insertRow(row);
-        ui->tblContas->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
-        ui->tblContas->setItem(row, 1, new QTableWidgetItem(query.value("nome").toString()));
-        ui->tblContas->setItem(row, 2, new QTableWidgetItem(query.value("tipo").toString()));
-        ui->tblContas->setItem(row, 3, new QTableWidgetItem(query.value("banco").toString()));
-        ui->tblContas->setItem(row, 4, new QTableWidgetItem(query.value("saldo_inicial").toString()));
-        ui->tblContas->setItem(row, 5, new QTableWidgetItem(query.value("ativo").toString()));
+        ui->tblContas->setItem(row, 0, new QTableWidgetItem(QString::number(conta.id)));
+        ui->tblContas->setItem(row, 1, new QTableWidgetItem(conta.nome));
+        ui->tblContas->setItem(row, 2, new QTableWidgetItem(conta.tipo));
+        ui->tblContas->setItem(row, 3, new QTableWidgetItem(conta.banco));
+        ui->tblContas->setItem(row, 4, new QTableWidgetItem(QString::number(conta.saldoInicial, 'f', 2)));
+        ui->tblContas->setItem(row, 5, new QTableWidgetItem(conta.ativo ? "Sim" : "Não"));
         row++;
     }
+
     ui->tblContas->setColumnHidden(0, true);
 }
 
 void ContasWidget::on_btnNova_clicked()
 {
-    auto *janela = new ContaWidget(nullptr);
-    janela->setAttribute(Qt::WA_DeleteOnClose);
-    janela->show();
-    if (janela->exec() == QDialog::Accepted) { carregarContas(); }
+    auto *dlg = new ContaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(ContaWidget::Modo::Inserir);
+    dlg->show();
+    if (dlg->exec() == QDialog::Accepted) { carregarContas(); }
 }
 
 void ContasWidget::on_btnEditar_clicked()
@@ -69,9 +75,12 @@ void ContasWidget::on_btnEditar_clicked()
     int linha = index.row();
     int id = ui->tblContas->item(linha, 0)->text().toInt();
 
-    ContaWidget dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted) { carregarContas(); }
+    auto *dlg = new ContaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(ContaWidget::Modo::Editar);
+    dlg->setId(id);
+    dlg->show();
+    if (dlg->exec() == QDialog::Accepted) { carregarContas(); }
 }
 
 void ContasWidget::on_btnExcluir_clicked()
@@ -87,8 +96,10 @@ void ContasWidget::on_btnExcluir_clicked()
     int linha = index.row();
     int id = ui->tblContas->item(linha, 0)->text().toInt();
 
-    ContaConfirmDialog dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted) { carregarContas(); }
+    auto *dlg = new ContaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(ContaWidget::Modo::Excluir);
+    dlg->setId(id);
+    if (dlg->exec() == QDialog::Accepted) { carregarContas(); }
 }
 

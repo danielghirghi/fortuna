@@ -42,9 +42,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         contas/ContaWidget.h
         contas/ContaWidget.cpp
         contas/ContaWidget.ui
-        contas/ContaConfirmDialog.ui
-        contas/ContaConfirmDialog.h
-        contas/ContaConfirmDialog.cpp
         tags/TagsWidget.h
         tags/TagsWidget.cpp
         tags/TagsWidget.ui
@@ -71,6 +68,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         movimentacoes/MovimentacaoConfirmDialog.ui
         database/Database.h
         database/Database.cpp
+        models/Conta.h
+        repositories/ContasRepository.h
+        repositories/ContaRepository.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
