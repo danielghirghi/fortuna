@@ -1,10 +1,9 @@
 #include "TagsWidget.h"
 #include "ui_TagsWidget.h"
 #include "TagWidget.h"
-#include "TagConfirmDialog.h"
+#include "../repositories/TagsRepository.h"
 
 #include <QSqlQuery>
-#include "../database/Database.h"
 
 #include <QMessageBox>
 #include <QSqlError>
@@ -28,29 +27,37 @@ void TagsWidget::carregarTags()
 {
     ui->tblTags->setRowCount(0);
 
-    QSqlQuery query(Database::instance().db());
-    if (!query.exec("SELECT id, nome, cor, ativo FROM tags ORDER BY nome")) {
-        QMessageBox::warning(this, "Erro", "Falha ao carregar Tags: " + query.lastError().text());
+    TagsRepository repository;
+    QList<Tag> tags = repository.listar();
+
+    if (!repository.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
         return;
     }
 
     int row = 0;
-    while (query.next()) {
+
+    for (const Tag &tag : tags)
+    {
         ui->tblTags->insertRow(row);
-        ui->tblTags->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
-        ui->tblTags->setItem(row, 1, new QTableWidgetItem(query.value("nome").toString()));
-        ui->tblTags->setItem(row, 2, new QTableWidgetItem(query.value("cor").toString()));
-        ui->tblTags->setItem(row, 3, new QTableWidgetItem(query.value("ativo").toString()));
+        ui->tblTags->setItem(row, 0, new QTableWidgetItem(QString::number(tag.id)));
+        ui->tblTags->setItem(row, 1, new QTableWidgetItem(tag.nome));
+        ui->tblTags->setItem(row, 2, new QTableWidgetItem(tag.cor));
+        ui->tblTags->setItem(row, 5, new QTableWidgetItem(tag.ativo ? "Sim" : "Não"));
         row++;
     }
+
     ui->tblTags->setColumnHidden(0, true);
 }
 
-void TagsWidget::on_btnNova_clicked(){
-    auto *janela = new TagWidget(nullptr);
-    janela->setAttribute(Qt::WA_DeleteOnClose);
-    janela->show();
-    if (janela->exec() == QDialog::Accepted) { carregarTags(); }
+void TagsWidget::on_btnNova_clicked()
+{
+    TagWidget *dlg = new TagWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(TagWidget::Modo::Inserir);
+    dlg->show();
+    if (dlg->exec() == QDialog::Accepted) { carregarTags(); }
 }
 
 void TagsWidget::on_btnEditar_clicked()
@@ -66,9 +73,11 @@ void TagsWidget::on_btnEditar_clicked()
     int linha = index.row();
     int id = ui->tblTags->item(linha, 0)->text().toInt();
 
-    TagWidget dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted){ carregarTags(); }
+    TagWidget *dlg = new TagWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(TagWidget::Modo::Editar);
+    dlg->setId(id);
+    if (dlg->exec() == QDialog::Accepted){ carregarTags(); }
 }
 
 void TagsWidget::on_btnExcluir_clicked()
@@ -84,7 +93,9 @@ void TagsWidget::on_btnExcluir_clicked()
     int linha = index.row();
     int id = ui->tblTags->item(linha, 0)->text().toInt();
 
-    TagConfirmDialog dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted) { carregarTags(); }
+    TagWidget *dlg = new TagWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(TagWidget::Modo::Excluir);
+    dlg->setId(id);
+    if (dlg->exec() == QDialog::Accepted) { carregarTags(); }
 }

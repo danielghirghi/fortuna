@@ -1,10 +1,9 @@
 #include "CategoriasWidget.h"
 #include "ui_CategoriasWidget.h"
 #include "CategoriaWidget.h"
-#include "CategoriaConfirmDialog.h"
+#include "../repositories/CategoriasRepository.h"
 
 #include <QSqlQuery>
-#include "../database/Database.h"
 
 #include <QMessageBox>
 #include <QSqlError>
@@ -28,31 +27,35 @@ void CategoriasWidget::carregarCategorias()
 {
     ui->tblCategorias->setRowCount(0);
 
-    QSqlQuery query(Database::instance().db());
-    if (!query.exec("SELECT id, nome, grupo, tipo, ativo FROM categorias ORDER BY nome")) {
-        QMessageBox::warning(this, "Erro", "Falha ao carregar categorias: " + query.lastError().text());
+    CategoriasRepository repository;
+    QList<Categoria> categorias = repository.listar();
+
+    if (!repository.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
         return;
     }
 
     int row = 0;
-    while (query.next()) {
+    for (const Categoria &categoria : categorias) {
         ui->tblCategorias->insertRow(row);
-        ui->tblCategorias->setItem(row, 0, new QTableWidgetItem(query.value("id").toString()));
-        ui->tblCategorias->setItem(row, 1, new QTableWidgetItem(query.value("nome").toString()));
-        ui->tblCategorias->setItem(row, 2, new QTableWidgetItem(query.value("grupo").toString()));
-        ui->tblCategorias->setItem(row, 3, new QTableWidgetItem(query.value("tipo").toString()));
-        ui->tblCategorias->setItem(row, 4, new QTableWidgetItem(query.value("ativo").toString()));
+        ui->tblCategorias->setItem(row, 0, new QTableWidgetItem(QString::number(categoria.id)));
+        ui->tblCategorias->setItem(row, 1, new QTableWidgetItem(categoria.nome));
+        ui->tblCategorias->setItem(row, 2, new QTableWidgetItem(categoria.tipo));
+        ui->tblCategorias->setItem(row, 3, new QTableWidgetItem(categoria.grupo));
+        ui->tblCategorias->setItem(row, 4, new QTableWidgetItem(categoria.ativo ? "Sim" : "Não"));
         row++;
     }
     ui->tblCategorias->setColumnHidden(0,true);
 }
 
-void CategoriasWidget::on_btnNova_clicked(){
-    auto *janela = new CategoriaWidget(nullptr);
-    janela->setAttribute(Qt::WA_DeleteOnClose);
-    janela->show();
-
-    if (janela->exec() == QDialog::Accepted) { carregarCategorias(); }
+void CategoriasWidget::on_btnNova_clicked()
+{
+    CategoriaWidget *dlg = new CategoriaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(CategoriaWidget::Modo::Inserir);
+    dlg->show();
+    if (dlg->exec() == QDialog::Accepted) { carregarCategorias(); }
 }
 
 void CategoriasWidget::on_btnEditar_clicked()
@@ -68,9 +71,12 @@ void CategoriasWidget::on_btnEditar_clicked()
     int linha = index.row();
     int id = ui->tblCategorias->item(linha, 0)->text().toInt();
 
-    CategoriaWidget dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted) { carregarCategorias(); }
+    CategoriaWidget *dlg = new CategoriaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(CategoriaWidget::Modo::Editar);
+    dlg->setId(id);
+    dlg->show();
+    if (dlg->exec() == QDialog::Accepted) { carregarCategorias(); }
 }
 
 void CategoriasWidget::on_btnExcluir_clicked()
@@ -79,14 +85,17 @@ void CategoriasWidget::on_btnExcluir_clicked()
 
     if (!index.isValid())
     {
-        QMessageBox::warning(this, "Conta", "Selecione uma conta.");
+        QMessageBox::warning(this, "Categoria", "Selecione uma categoria.");
         return;
     }
 
     int linha = index.row();
     int id = ui->tblCategorias->item(linha, 0)->text().toInt();
 
-    CategoriaConfirmDialog dlg(this);
-    dlg.setId(id);
-    if (dlg.exec() == QDialog::Accepted) { carregarCategorias(); }
+
+    CategoriaWidget *dlg = new CategoriaWidget(nullptr);
+    dlg->setAttribute(Qt::WA_DeleteOnClose);
+    dlg->setModo(CategoriaWidget::Modo::Excluir);
+    dlg->setId(id);
+    if (dlg->exec() == QDialog::Accepted) { carregarCategorias(); }
 }

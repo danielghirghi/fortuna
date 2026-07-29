@@ -33,24 +33,27 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         categorias/CategoriaWidget.h
         categorias/CategoriaWidget.cpp
         categorias/CategoriaWidget.ui
-        categorias/CategoriaConfirmDialog.h
-        categorias/CategoriaConfirmDialog.cpp
-        categorias/CategoriaConfirmDialog.ui
+        models/Categoria.h
+        repositories/CategoriasRepository.h
+        repositories/CategoriasRepository.cpp
         contas/ContasWidget.cpp
         contas/ContasWidget.h
         contas/ContasWidget.ui
         contas/ContaWidget.h
         contas/ContaWidget.cpp
         contas/ContaWidget.ui
+        models/Conta.h
+        repositories/ContasRepository.h
+        repositories/ContasRepository.cpp
         tags/TagsWidget.h
         tags/TagsWidget.cpp
         tags/TagsWidget.ui
         tags/TagWidget.h
         tags/TagWidget.cpp
         tags/TagWidget.ui
-        tags/TagConfirmDialog.h
-        tags/TagConfirmDialog.cpp
-        tags/TagConfirmDialog.ui
+        models/Tag.h
+        repositories/TagsRepository.h
+        repositories/TagsRepository.cpp
         movimentacoes/MovimentacoesWidget.ui
         movimentacoes/MovimentacoesWidget.cpp
         movimentacoes/MovimentacoesWidget.h
@@ -68,9 +71,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         movimentacoes/MovimentacaoConfirmDialog.ui
         database/Database.h
         database/Database.cpp
-        models/Conta.h
-        repositories/ContasRepository.h
-        repositories/ContaRepository.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -55,7 +55,7 @@ void ContasWidget::carregarContas()
 
 void ContasWidget::on_btnNova_clicked()
 {
-    auto *dlg = new ContaWidget(nullptr);
+    ContaWidget *dlg = new ContaWidget(nullptr);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->setModo(ContaWidget::Modo::Inserir);
     dlg->show();
@@ -75,7 +75,7 @@ void ContasWidget::on_btnEditar_clicked()
     int linha = index.row();
     int id = ui->tblContas->item(linha, 0)->text().toInt();
 
-    auto *dlg = new ContaWidget(nullptr);
+    ContaWidget *dlg = new ContaWidget(nullptr);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->setModo(ContaWidget::Modo::Editar);
     dlg->setId(id);
@@ -96,7 +96,7 @@ void ContasWidget::on_btnExcluir_clicked()
     int linha = index.row();
     int id = ui->tblContas->item(linha, 0)->text().toInt();
 
-    auto *dlg = new ContaWidget(nullptr);
+    ContaWidget *dlg = new ContaWidget(nullptr);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
     dlg->setModo(ContaWidget::Modo::Excluir);
     dlg->setId(id);

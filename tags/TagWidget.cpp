@@ -1,22 +1,87 @@
 #include "TagWidget.h"
 #include "ui_TagWidget.h"
 
+#include "../repositories/TagsRepository.h"
+
+#include <qpushbutton.h>
 #include <qsqlerror.h>
 #include <qsqlquery.h>
 #include <QMessageBox>
 
-#include "../database/Database.h"
-
 TagWidget::TagWidget(QWidget *parent) : QDialog(parent)
-    , ui(new Ui::TagWidget){
+    , ui(new Ui::TagWidget)
+{
     ui->setupUi(this);
     setWindowTitle("Nova Tag");
 
-    connect(ui->bbTag, &QDialogButtonBox::accepted, this, &TagWidget::salvar);
-    connect(ui->bbTag, &QDialogButtonBox::rejected, this, &TagWidget::close);
+    connect(ui->bbTag, &QDialogButtonBox::accepted, this, &TagWidget::confirmar);
+    connect(ui->bbTag, &QDialogButtonBox::rejected, this, &TagWidget::reject);
 }
 
 TagWidget::~TagWidget(){ delete ui; }
+
+Tag TagWidget::tagDaInterface() const
+{
+    Tag tag;
+
+    tag.nome  = ui->edtNome->text();
+    tag.cor   = ui->edtCor->text();
+    tag.ativo = ui->chkAtiva->isChecked();
+
+    return tag;
+}
+
+void TagWidget::preencherInterface(const Tag &tag)
+{
+    ui->edtNome->setText(tag.nome);
+    ui->edtCor->setText(tag.cor);
+    ui->chkAtiva->setChecked(tag.ativo);
+}
+
+void TagWidget::setModo(Modo modo)
+{
+    m_modo = modo;
+    QPushButton *botao = ui->bbTag->button(QDialogButtonBox::Save);
+
+    switch (modo)
+    {
+    case Modo::Inserir:
+        setWindowTitle("Nova Tag");
+        botao->setText("Salvar");
+        break;
+
+    case Modo::Editar:
+        setWindowTitle("Editar Tag");
+        botao->setText("Atualizar");
+        break;
+
+    case Modo::Excluir:
+        setWindowTitle("Excluir Tag");
+        ui->edtNome->setReadOnly(true);
+        ui->edtCor->setReadOnly(true);
+        ui->chkAtiva->setEnabled(false);
+        botao->setText("Excluir");
+        break;
+    }
+}
+
+void TagWidget::confirmar()
+{
+    switch (m_modo)
+    {
+    case Modo::Inserir:
+        inserirTag();
+        break;
+
+    case Modo::Editar:
+        atualizarTag();
+        break;
+
+    case Modo::Excluir:
+        excluirTag();
+        break;
+    }
+}
 
 void TagWidget::setId(int id)
 {
@@ -26,60 +91,53 @@ void TagWidget::setId(int id)
 
 void TagWidget::carregarTag()
 {
-    QSqlQuery query(Database::instance().db());
+    TagsRepository repository;
+    Tag tag = repository.buscarPorId(m_id);
 
-    query.prepare(R"( SELECT nome, cor, ativo FROM tags WHERE id =  :id )");
-    query.bindValue(":id", m_id);
-    if (!query.exec()) return;
-    if (!query.next()) return;
+    if (tag.id == -1)
+    {
+        QMessageBox::warning(this, "Erro", repository.lastError());
+        return;
+    }
 
-    ui->edtNome->setText(query.value("nome").toString());
-    ui->edtCor->setText(query.value("cor").toString());
-    ui->chkAtiva->setChecked(query.value("ativo").toBool());
-}
-
-void TagWidget::salvar()
-{
-    if (m_id == -1)
-        inserirTag();
-    else
-        atualizarTag();
+    preencherInterface(tag);
 }
 
 void TagWidget::inserirTag()
 {
-    QSqlQuery query(Database::instance().db());
+    TagsRepository repository;
+    Tag tag = tagDaInterface();
 
-    query.prepare(R"(
-        INSERT INTO tags ( nome, cor, ativo ) VALUES ( :nome, :cor, :ativo )
-    )");
-
-    query.bindValue(":nome",  ui->edtNome->text());
-    query.bindValue(":cor",   ui->edtCor->text());
-    query.bindValue(":ativo", ui->chkAtiva->isChecked());
-
-    if(query.exec()) { accept(); }
-    else { QMessageBox::critical( this, "Erro", query.lastError().text()); }
+    if(!repository.inserir(tag))
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
+        return;
+    }
+    accept();
 }
 
 void TagWidget::atualizarTag()
 {
-    QSqlQuery query(Database::instance().db());
+    TagsRepository repository;
+    Tag tag = tagDaInterface();
+    tag.id = m_id;
 
-    query.prepare(R"(
-    UPDATE tags
-        SET
-            nome = :nome,
-            cor = :cor,
-            ativo = :ativa
-        WHERE id = :id
-    )");
+    if (!repository.atualizar(tag))
+    {
+        QMessageBox::warning(this, "Erro", repository.lastError());
+        return;
+    }
+    accept();
+}
 
-    query.bindValue(":id", m_id);
-    query.bindValue(":nome",  ui->edtNome->text());
-    query.bindValue(":cor",   ui->edtCor->text());
-    query.bindValue(":ativa", ui->chkAtiva->isChecked());
+void TagWidget::excluirTag()
+{
+    TagsRepository repository;
 
-    if(query.exec()) { accept(); }
-    else { QMessageBox::critical( this, "Erro", query.lastError().text()); }
+    if (!repository.remover(m_id))
+    {
+        QMessageBox::warning(this, "Erro", repository.lastError());
+        return;
+    }
+    accept();
 }

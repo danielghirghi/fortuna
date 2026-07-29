@@ -109,7 +109,6 @@ void ContaWidget::carregarConta()
         QMessageBox::warning(this, "Erro", repository.lastError());
         return;
     }
-
     preencherInterface(conta);
 }
 
