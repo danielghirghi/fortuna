@@ -17,7 +17,7 @@ public:
 
 private slots:
     void carregarMovimentacoes();
-    void abrirReceita();
+    void inserirMovimentacao();
     void abrirDespesa();
     void abrirTransferencia();
     void on_btnEditar_clicked();

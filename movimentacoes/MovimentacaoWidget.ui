@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TransferenciaWidget</class>
- <widget class="QDialog" name="TransferenciaWidget">
+ <class>MovimentacaoWidget</class>
+ <widget class="QDialog" name="MovimentacaoWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -51,7 +51,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QDateEdit" name="dateTransferencia"/>
+       <widget class="QDateEdit" name="dateMovimentacao"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="lblValor">
@@ -71,16 +71,16 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="lblOrigem">
+       <widget class="QLabel" name="lblPrim">
         <property name="text">
          <string>Conta Origem: </string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="lblDestino">
+       <widget class="QLabel" name="lblSecn">
         <property name="text">
-         <string>Conta Destino:</string>
+         <string>Categoria: </string>
         </property>
        </widget>
       </item>
@@ -88,16 +88,16 @@
        <widget class="QLineEdit" name="edtDescricao"/>
       </item>
       <item row="3" column="1">
-       <widget class="QComboBox" name="cmbOrigem"/>
+       <widget class="QComboBox" name="cmbPrim"/>
       </item>
       <item row="4" column="1">
-       <widget class="QComboBox" name="cmbDestino"/>
+       <widget class="QComboBox" name="cmbSecn"/>
       </item>
      </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QDialogButtonBox" name="bbTransferencia">
+  <widget class="QDialogButtonBox" name="bbMovimentacao">
    <property name="geometry">
     <rect>
      <x>10</x>

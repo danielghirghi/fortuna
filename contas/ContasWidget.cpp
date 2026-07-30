@@ -37,7 +37,6 @@ void ContasWidget::carregarContas()
     }
 
     int row = 0;
-
     for (const Conta &conta : contas)
     {
         ui->tblContas->insertRow(row);

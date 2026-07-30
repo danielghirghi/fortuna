@@ -10,7 +10,6 @@ QString ContasRepository::lastError(){ return m_lastError; }
 QList<Conta> ContasRepository::listar()
 {
     QList<Conta> contas;
-
     QSqlQuery query(Database::instance().db());
 
     if (!query.exec(R"(
@@ -42,7 +41,6 @@ QList<Conta> ContasRepository::listar()
 
         contas.append(conta);
     }
-
     return contas;
 }
 
@@ -62,7 +60,6 @@ Conta ContasRepository::buscarPorId(int id)
         FROM contas
         WHERE id = :id
         )");
-
     query.bindValue(":id", id);
 
     if (!query.exec())

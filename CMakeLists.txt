@@ -27,6 +27,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         mainwindow.ui
+        database/Database.h
+        database/Database.cpp
+
         categorias/CategoriasWidget.cpp
         categorias/CategoriasWidget.h
         categorias/CategoriasWidget.ui
@@ -36,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         models/Categoria.h
         repositories/CategoriasRepository.h
         repositories/CategoriasRepository.cpp
+
         contas/ContasWidget.cpp
         contas/ContasWidget.h
         contas/ContasWidget.ui
@@ -45,6 +49,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         models/Conta.h
         repositories/ContasRepository.h
         repositories/ContasRepository.cpp
+
         tags/TagsWidget.h
         tags/TagsWidget.cpp
         tags/TagsWidget.ui
@@ -54,23 +59,23 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         models/Tag.h
         repositories/TagsRepository.h
         repositories/TagsRepository.cpp
+
         movimentacoes/MovimentacoesWidget.ui
         movimentacoes/MovimentacoesWidget.cpp
         movimentacoes/MovimentacoesWidget.h
-        movimentacoes/ReceitaWidget.ui
-        movimentacoes/ReceitaWidget.cpp
-        movimentacoes/ReceitaWidget.h
-        movimentacoes/DespesaWidget.ui
-        movimentacoes/DespesaWidget.cpp
-        movimentacoes/DespesaWidget.h
-        movimentacoes/TransferenciaWidget.ui
-        movimentacoes/TransferenciaWidget.cpp
-        movimentacoes/TransferenciaWidget.h
-        movimentacoes/MovimentacaoConfirmDialog.h
-        movimentacoes/MovimentacaoConfirmDialog.cpp
-        movimentacoes/MovimentacaoConfirmDialog.ui
-        database/Database.h
-        database/Database.cpp
+        movimentacoes/MovimentacaoWidget.ui
+        movimentacoes/MovimentacaoWidget.cpp
+        movimentacoes/MovimentacaoWidget.h
+        models/Movimentacao.h
+        models/Movimentacao.cpp
+        repositories/MovimentacoesRepository.h
+        repositories/MovimentacoesRepository.cpp
+
+
+
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

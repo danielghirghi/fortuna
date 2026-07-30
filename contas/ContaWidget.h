@@ -32,9 +32,9 @@ private slots:
     void excluirConta();
 
 private:
-    int m_id = -1;
+    int m_id {-1};
     Ui::ContaWidget *ui;
-    Modo m_modo = Modo::Inserir;
+    Modo m_modo {Modo::Inserir};
     void carregarConta();
     Conta contaDaInterface() const;
     void preencherInterface(const Conta &conta);

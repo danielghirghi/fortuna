@@ -6,10 +6,10 @@
 class Tag
 {
 public:
-    int id = -1;
-    QString nome;
-    QString cor;
-    bool ativo = true;
+    int id {-1};
+    QString nome {};
+    QString cor {};
+    bool ativo {true};
 };
 
 #endif // TAG_H
