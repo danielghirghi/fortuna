@@ -7,13 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>207</height>
+    <height>230</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
     <width>320</width>
-    <height>178</height>
+    <height>230</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -21,13 +27,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
+    <layout class="QVBoxLayout" name="layPrincipal" stretch="0,0">
      <property name="spacing">
       <number>6</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
      </property>
+     <item>
+      <widget class="QComboBox" name="cmbTipo"/>
+     </item>
      <item>
       <layout class="QFormLayout" name="layFormulario">
        <property name="horizontalSpacing">
@@ -63,6 +72,9 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="edtDescricao"/>
+       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="lblPrim">
          <property name="text">
@@ -70,18 +82,15 @@
          </property>
         </widget>
        </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="cmbPrim"/>
+       </item>
        <item row="4" column="0">
         <widget class="QLabel" name="lblSecn">
          <property name="text">
           <string>Categoria: </string>
          </property>
         </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="edtDescricao"/>
-       </item>
-       <item row="3" column="1">
-        <widget class="QComboBox" name="cmbPrim"/>
        </item>
        <item row="4" column="1">
         <widget class="QComboBox" name="cmbSecn"/>

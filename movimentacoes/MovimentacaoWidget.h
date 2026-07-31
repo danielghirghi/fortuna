@@ -16,13 +16,6 @@ enum class Modo
     Excluir
 };
 
-enum class TipoMovWdgt
-{
-    Despesa,
-    Receita,
-    Transferencia
-};
-
 class MovimentacaoWidget : public QDialog
 {
     Q_OBJECT
@@ -31,7 +24,7 @@ public:
     explicit MovimentacaoWidget(QWidget *parent = nullptr);
     ~MovimentacaoWidget();
     void setModo(Modo modo);
-    TipoMovWdgt tipo;
+    TipoMovimentacao tipo;
     void setId(int id);
     QString getTipo() const;
     void setTipo(QString tipo);
@@ -41,6 +34,7 @@ private slots:
     void inserirMovimentacao();
     void atualizarMovimentacao();
     void excluirMovimentacao();
+    void atualizarInterface();
 
 private:
     int m_id {-1};

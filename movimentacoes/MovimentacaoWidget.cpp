@@ -6,6 +6,7 @@
 #include "../repositories/ContasRepository.h"
 #include "../repositories/CategoriasRepository.h"
 
+#include <qmenu.h>
 #include <qpushbutton.h>
 #include <qsqlerror.h>
 #include <qsqlquery.h>
@@ -20,6 +21,19 @@ MovimentacaoWidget::MovimentacaoWidget(QWidget *parent) : QDialog(parent)
     ui->spnValor->setMinimum(-1000000000.0);
     ui->spnValor->setMaximum(1000000000.0);
 
+    ui->dateMovimentacao->setDate(QDate::currentDate());
+    ui->dateMovimentacao->setCalendarPopup(true);
+
+    ui->cmbTipo->addItem("Despesa", QVariant::fromValue(int(TipoMovimentacao::Despesa)));
+    ui->cmbTipo->addItem("Renda", QVariant::fromValue(int(TipoMovimentacao::Receita)));
+    ui->cmbTipo->addItem("Transferência", QVariant::fromValue(int(TipoMovimentacao::Transferencia)));
+    atualizarInterface();
+
+    connect(ui->cmbTipo,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &MovimentacaoWidget::atualizarInterface);
+
     connect(ui->bbMovimentacao, &QDialogButtonBox::accepted, this, &MovimentacaoWidget::confirmar);
     connect(ui->bbMovimentacao, &QDialogButtonBox::rejected, this, &MovimentacaoWidget::reject);
 }
@@ -30,11 +44,11 @@ QString MovimentacaoWidget::getTipo() const
 {
     switch (MovimentacaoWidget::tipo)
     {
-    case TipoMovWdgt::Receita:
+    case TipoMovimentacao::Receita:
         return "RENDA";
-    case TipoMovWdgt::Despesa:
+    case TipoMovimentacao::Despesa:
         return "DESPESA";
-    case TipoMovWdgt::Transferencia:
+    case TipoMovimentacao::Transferencia:
         return "TRANSFERENCIA";
     }
     return "ERRO";
@@ -44,19 +58,83 @@ void MovimentacaoWidget::setTipo(QString tipo)
 {
     if (tipo == "RENDA" || tipo == "RECEITA")
     {
-        MovimentacaoWidget::tipo = TipoMovWdgt::Receita;
+        MovimentacaoWidget::tipo = TipoMovimentacao::Receita;
         return;
     }
     if (tipo =="DESPESA")
     {
-        MovimentacaoWidget::tipo = TipoMovWdgt::Despesa;
+        MovimentacaoWidget::tipo = TipoMovimentacao::Despesa;
         return;
     }
     if (tipo =="TRANSFERENCIA")
     {
-        MovimentacaoWidget::tipo = TipoMovWdgt::Transferencia;
+        MovimentacaoWidget::tipo = TipoMovimentacao::Transferencia;
         return;
     }
+}
+
+void MovimentacaoWidget::atualizarInterface()
+{
+    ui->cmbPrim->clear();
+    ui->cmbSecn->clear();
+
+    QString tipo = ui->cmbTipo->currentText();
+
+    ContasRepository contasrepo;
+    QList<Conta> contas = contasrepo.listar();
+    if (!contasrepo.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", contasrepo.lastError());
+        return;
+    }
+    for (const Conta &conta : contas){ ui->cmbPrim->addItem(conta.nome); }
+
+    if (tipo.compare("Transferencia", Qt::CaseInsensitive) == 0 ||
+        tipo.compare("Transferência", Qt::CaseInsensitive)== 0)
+    {
+        this->setTipo("TRANSFERENCIA");
+        ui->lblPrim->setText("Conta Origem:");
+        ui->lblSecn->setText("Conta Destino:");
+        for (const Conta &conta : contas)
+        { ui->cmbSecn->addItem(conta.nome); }
+        return;
+    }
+    CategoriasRepository catrepo;
+    QList<Categoria> categorias = catrepo.listar();
+    if (!catrepo.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", contasrepo.lastError());
+        return;
+    }
+
+    if (tipo.compare("Renda", Qt::CaseInsensitive) == 0 ||
+        tipo.compare("Receita", Qt::CaseInsensitive)== 0)
+    {
+        this->setTipo("RENDA");
+        ui->lblPrim->setText("Conta Destino:");
+        ui->lblSecn->setText("Categoria:");
+        for (const Categoria &categoria : categorias)
+        {
+            if (categoria.tipo.compare("Renda", Qt::CaseInsensitive) == 0)
+            {
+                ui->cmbSecn->addItem(categoria.nome);
+            }
+        }
+        return;
+    }
+
+    // Tipo = DESPESA
+    this->setTipo("DESPESA");
+    ui->lblPrim->setText("Conta Origem:");
+    ui->lblSecn->setText("Categoria:");
+    for (const Categoria &categoria : categorias)
+    {
+        if (categoria.tipo.compare("Despesa", Qt::CaseInsensitive) == 0)
+        {
+            ui->cmbSecn->addItem(categoria.nome);
+        }
+    }
+    return;
 }
 
 Movimentacao MovimentacaoWidget::movimentacaoDaInterface() const
@@ -100,39 +178,6 @@ void MovimentacaoWidget::preencherInterface(const Movimentacao &movimentacao)
 
 void MovimentacaoWidget::setModo(Modo modo)
 {
-    ContasRepository contasrepo;
-    QList<Conta> contas = contasrepo.listar();
-    if (!contasrepo.lastError().isEmpty())
-    {
-        QMessageBox::warning( this, "Erro", contasrepo.lastError());
-        return;
-    }
-    for (const Conta &conta : contas){ ui->cmbPrim->addItem(conta.nome); }
-
-    if (this->tipo == TipoMovWdgt::Transferencia)
-    {
-        ui->lblSecn->setText("Conta Destino:");
-        for (const Conta &conta : contas)
-        { ui->cmbSecn->addItem(conta.nome); }
-    }
-    else
-    {
-
-        if (this->tipo == TipoMovWdgt::Receita)
-        {
-            ui->lblPrim->setText("Conta Destino:");
-        }
-        CategoriasRepository catrepo;
-        QList<Categoria> categorias = catrepo.listar();
-        if (!catrepo.lastError().isEmpty())
-        {
-            QMessageBox::warning( this, "Erro", catrepo.lastError());
-            return;
-        }
-        for (const Categoria &categoria : categorias)
-        { ui->cmbSecn->addItem(categoria.nome); }
-    }
-
     m_modo = modo;
     QPushButton *botao = ui->bbMovimentacao->button(QDialogButtonBox::Save);
 
@@ -152,6 +197,7 @@ void MovimentacaoWidget::setModo(Modo modo)
         setWindowTitle("Excluir " + this->getTipo());
         ui->dateMovimentacao->setReadOnly(true);
         ui->edtDescricao->setReadOnly(true);
+        ui->cmbTipo->setEnabled(false);
         ui->cmbPrim->setEnabled(false);
         ui->cmbSecn->setEnabled(false);
         ui->spnValor->setEnabled(false);
@@ -194,6 +240,11 @@ void MovimentacaoWidget::carregarMovimentacao()
         QMessageBox::warning(this, "Erro", repository.lastError());
         return;
     }
+
+    setTipo(movimentacao.getTipo());
+    ui->cmbTipo->setCurrentIndex(ui->cmbTipo->findData(QVariant::fromValue(int(movimentacao.tipo))));
+    atualizarInterface();
+
     preencherInterface(movimentacao);
 }
 

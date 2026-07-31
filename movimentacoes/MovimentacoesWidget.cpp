@@ -15,17 +15,6 @@ MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : QWidget(parent)
     , ui(new Ui::MovimentacoesWidget){
     ui->setupUi(this);
 
-    QMenu *menu = new QMenu(this);
-
-    QAction *actReceita = menu->addAction("Receita");
-    connect(actReceita, &QAction::triggered, this, &MovimentacoesWidget::inserirMovimentacao);
-    QAction *actDespesa = menu->addAction("Despesa");
-    connect(actDespesa, &QAction::triggered, this, &MovimentacoesWidget::abrirDespesa);
-    QAction *actTransferencia = menu->addAction("Transferência");
-    connect(actTransferencia, &QAction::triggered, this, &MovimentacoesWidget::abrirTransferencia);
-
-    ui->btnNova->setMenu(menu);
-
     setWindowTitle("Movimentações");
 
     carregarMovimentacoes();
@@ -78,31 +67,11 @@ void MovimentacoesWidget::carregarMovimentacoes()
     header->setSectionResizeMode(5, QHeaderView::Stretch); // Origem
     header->setSectionResizeMode(6, QHeaderView::Stretch); // Destino
     header->setSectionResizeMode(7, QHeaderView::ResizeToContents); // Categoria
-    // visualizacao = 1;
 }
 
-void MovimentacoesWidget::inserirMovimentacao() {
+void MovimentacoesWidget::on_btnNova_clicked() {
     auto *dlg = new MovimentacaoWidget(this);
     dlg->setAttribute(Qt::WA_DeleteOnClose);
-    dlg->setTipo("RECEITA");
-    dlg->setModo(Modo::Inserir);
-    dlg->show();
-    if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
-}
-
-void MovimentacoesWidget::abrirDespesa() {
-    auto *dlg = new MovimentacaoWidget(this);
-    dlg->setAttribute(Qt::WA_DeleteOnClose);
-    dlg->setTipo("DESPESA");
-    dlg->setModo(Modo::Inserir);
-    dlg->show();
-    if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
-}
-
-void MovimentacoesWidget::abrirTransferencia() {
-    auto *dlg = new MovimentacaoWidget(this);
-    dlg->setAttribute(Qt::WA_DeleteOnClose);
-    dlg->setTipo("TRANSFERENCIA");
     dlg->setModo(Modo::Inserir);
     dlg->show();
     if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
@@ -149,21 +118,4 @@ void MovimentacoesWidget::on_btnExcluir_clicked()
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
-
-// void MovimentacoesWidget::on_btnToggleVisualizacao_clicked()
-// {
-//     switch(visualizacao)
-//     {
-//     case 1:
-//         ui->btnToggleVisualizacao->setText("Ajustar para Conteúdo");
-//         ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-//         visualizacao = 2;
-//         break;
-//     case 2:
-//         ui->btnToggleVisualizacao->setText("Encaixar na Janela");
-//         ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-//         visualizacao = 1;
-//         break;
-//     }
-// }
 
