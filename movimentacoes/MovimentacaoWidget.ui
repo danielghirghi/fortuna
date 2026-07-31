@@ -19,100 +19,88 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>301</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
-    <property name="spacing">
-     <number>6</number>
-    </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
-    </property>
-    <item>
-     <layout class="QFormLayout" name="layFormulario">
-      <property name="horizontalSpacing">
-       <number>10</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>6</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lblData">
-        <property name="text">
-         <string>Data:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QDateEdit" name="dateMovimentacao"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lblValor">
-        <property name="text">
-         <string>Valor:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QDoubleSpinBox" name="spnValor"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="lblDescricao">
-        <property name="text">
-         <string>Descrição:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lblPrim">
-        <property name="text">
-         <string>Conta Origem: </string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="lblSecn">
-        <property name="text">
-         <string>Categoria: </string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="edtDescricao"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="cmbPrim"/>
-      </item>
-      <item row="4" column="1">
-       <widget class="QComboBox" name="cmbSecn"/>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QDialogButtonBox" name="bbMovimentacao">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>170</y>
-     <width>301</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+     </property>
+     <item>
+      <layout class="QFormLayout" name="layFormulario">
+       <property name="horizontalSpacing">
+        <number>10</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>6</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblData">
+         <property name="text">
+          <string>Data:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QDateEdit" name="dateMovimentacao"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblValor">
+         <property name="text">
+          <string>Valor:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="spnValor"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblDescricao">
+         <property name="text">
+          <string>Descrição:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblPrim">
+         <property name="text">
+          <string>Conta Origem: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="lblSecn">
+         <property name="text">
+          <string>Categoria: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="edtDescricao"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="cmbPrim"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="cmbSecn"/>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="bbMovimentacao">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

@@ -19,163 +19,151 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="bbCategoria">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>140</y>
-     <width>301</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>0</height>
-    </size>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
-   </property>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>301</width>
-     <height>135</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="layPrincipal">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <item>
-     <layout class="QFormLayout" name="layFormulario">
-      <property name="horizontalSpacing">
-       <number>10</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>10</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lblNome">
-        <property name="text">
-         <string>Nome:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="edtNome"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lblTipo">
-        <property name="text">
-         <string>Tipo:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="cmbTipo">
-        <property name="placeholderText">
-         <string>...</string>
-        </property>
-        <item>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="layPrincipal">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QFormLayout" name="layFormulario">
+       <property name="horizontalSpacing">
+        <number>10</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblNome">
          <property name="text">
-          <string>RENDA</string>
+          <string>Nome:</string>
          </property>
-        </item>
-        <item>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="edtNome"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblTipo">
          <property name="text">
-          <string>DESPESA</string>
+          <string>Tipo:</string>
          </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="lblGrupo">
-        <property name="text">
-         <string>Grupo:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QComboBox" name="cmbGrupo">
-        <property name="placeholderText">
-         <string>...</string>
-        </property>
-        <item>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="cmbTipo">
+         <property name="placeholderText">
+          <string>...</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>RENDA</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>DESPESA</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblGrupo">
          <property name="text">
-          <string>Variável</string>
+          <string>Grupo:</string>
          </property>
-        </item>
-        <item>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="cmbGrupo">
+         <property name="placeholderText">
+          <string>...</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Variável</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Fixa</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Alimentação</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Cuidado Pessoal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Esportes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Bugigangas</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Cursos</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valores Obrigatórios</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Investimentos</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Viagens</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Outros</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="chkAtiva">
          <property name="text">
-          <string>Fixa</string>
+          <string>Categoria Ativa</string>
          </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Alimentação</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Cuidado Pessoal</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Esportes</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Bugigangas</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Cursos</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Valores Obrigatórios</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Investimentos</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Viagens</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Outros</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QCheckBox" name="chkAtiva">
-        <property name="text">
-         <string>Categoria Ativa</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="bbCategoria">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>

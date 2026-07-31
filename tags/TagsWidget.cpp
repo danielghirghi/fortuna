@@ -44,11 +44,20 @@ void TagsWidget::carregarTags()
         ui->tblTags->setItem(row, 0, new QTableWidgetItem(QString::number(tag.id)));
         ui->tblTags->setItem(row, 1, new QTableWidgetItem(tag.nome));
         ui->tblTags->setItem(row, 2, new QTableWidgetItem(tag.cor));
-        ui->tblTags->setItem(row, 5, new QTableWidgetItem(tag.ativo ? "Sim" : "Não"));
+        ui->tblTags->setItem(row, 3, new QTableWidgetItem(tag.ativo ? "Sim" : "Não"));
         row++;
     }
-
     ui->tblTags->setColumnHidden(0, true);
+    ui->lblQuantidade->setText(QString::number(repository.contar()) + " tags");
+    ui->tblTags->verticalHeader()->setVisible(false);
+    ui->tblTags->setAlternatingRowColors(true);
+    ui->tblTags->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblTags->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    auto *header = ui->tblTags->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents); // ID
+    header->setSectionResizeMode(1, QHeaderView::Stretch);          // Nome
+    header->setSectionResizeMode(2, QHeaderView::Stretch); // Cor
+    header->setSectionResizeMode(3, QHeaderView::Stretch); // Ativa
 }
 
 void TagsWidget::on_btnNova_clicked()

@@ -22,8 +22,10 @@ private slots:
     void abrirTransferencia();
     void on_btnEditar_clicked();
     void on_btnExcluir_clicked();
+    // void on_btnToggleVisualizacao_clicked();
 
 private:
+    int visualizacao {1};
     Ui::MovimentacoesWidget *ui;
 };
 

@@ -13,6 +13,7 @@ public:
     bool inserir(const Tag &tag);
     bool atualizar(const Tag &tag);
     bool remover(int id);
+    int contar();
 };
 
 #endif // TAGSREPOSITORY_H

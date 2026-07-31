@@ -48,8 +48,19 @@ void ContasWidget::carregarContas()
         ui->tblContas->setItem(row, 5, new QTableWidgetItem(conta.ativo ? "Sim" : "Não"));
         row++;
     }
-
     ui->tblContas->setColumnHidden(0, true);
+    ui->lblQuantidade->setText(QString::number(repository.contar()) + " contas");
+    ui->tblContas->verticalHeader()->setVisible(false);
+    ui->tblContas->setAlternatingRowColors(true);
+    ui->tblContas->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblContas->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    auto *header = ui->tblContas->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents); // ID
+    header->setSectionResizeMode(1, QHeaderView::Stretch);          // Nome
+    header->setSectionResizeMode(2, QHeaderView::ResizeToContents); // Tipo
+    header->setSectionResizeMode(3, QHeaderView::Stretch);          // Banco
+    header->setSectionResizeMode(4, QHeaderView::ResizeToContents); // Saldo
+    header->setSectionResizeMode(5, QHeaderView::ResizeToContents); // Ativa
 }
 
 void ContasWidget::on_btnNova_clicked()

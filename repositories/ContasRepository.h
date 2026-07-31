@@ -13,6 +13,7 @@ public:
     bool inserir(const Conta &conta);
     bool atualizar(const Conta &conta);
     bool remover(int id);
+    int contar();
 };
 
 #endif

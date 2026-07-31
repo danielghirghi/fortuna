@@ -131,3 +131,25 @@ bool TagsRepository::remover(int id)
 
     return query.exec();
 }
+
+int TagsRepository::contar()
+{
+    QSqlQuery query(Database::instance().db());
+
+    int total {};
+
+    if (!query.exec(R"(
+        SELECT COUNT(*) FROM tags
+    )"))
+    {
+        m_lastError = query.lastError().text();
+        return -1;
+    }
+    if (query.next())
+    {
+        total = query.value(0).toInt();
+        return total;
+    }
+    return 0;
+}
+

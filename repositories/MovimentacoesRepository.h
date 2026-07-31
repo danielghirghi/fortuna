@@ -13,6 +13,7 @@ public:
     bool inserir(const Movimentacao &conta);
     bool atualizar(const Movimentacao &conta);
     bool remover(int id);
+    int contar();
 };
 
 #endif // MOVIMENTACOESREPOSITORY_H

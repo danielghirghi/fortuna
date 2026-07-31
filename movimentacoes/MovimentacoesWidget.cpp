@@ -1,4 +1,7 @@
 #include <qmenu.h>
+#include <QMessageBox>
+#include <QSqlError>
+#include <QTableWidgetItem>
 
 #include "MovimentacoesWidget.h"
 #include "ui_MovimentacoesWidget.h"
@@ -6,9 +9,7 @@
 #include "../repositories/MovimentacoesRepository.h"
 #include "MovimentacaoWidget.h"
 
-#include <QMessageBox>
-#include <QSqlError>
-#include <QTableWidgetItem>
+#include "../models/Format.h"
 
 MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : QWidget(parent)
     , ui(new Ui::MovimentacoesWidget){
@@ -52,7 +53,7 @@ void MovimentacoesWidget::carregarMovimentacoes()
     for (const Movimentacao &movimentacao : movimentacoes) {
         ui->tblMovimentacoes->insertRow(row);
         ui->tblMovimentacoes->setItem(row, 0, new QTableWidgetItem(QString::number(movimentacao.id)));
-        ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(movimentacao.data.toString()));
+        ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(Format::data(movimentacao.data)));
         ui->tblMovimentacoes->setItem(row, 2, new QTableWidgetItem(QString::number(movimentacao.valor,'f', 2)));
         ui->tblMovimentacoes->setItem(row, 3, new QTableWidgetItem(movimentacao.descricao));
         ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(movimentacao.getTipo()));
@@ -62,6 +63,22 @@ void MovimentacoesWidget::carregarMovimentacoes()
         row++;
     }
     ui->tblMovimentacoes->setColumnHidden(0,true);
+    ui->lblQuantidade->setText(QString::number(repository.contar()) + " movimentações");
+    ui->tblMovimentacoes->verticalHeader()->setVisible(false);
+    ui->tblMovimentacoes->setAlternatingRowColors(true);
+    ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblMovimentacoes->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    auto *header = ui->tblMovimentacoes->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents); // ID
+    header->setSectionResizeMode(1, QHeaderView::Stretch);          // Data
+    header->setSectionResizeMode(2, QHeaderView::ResizeToContents); // Valor
+    header->setSectionResizeMode(3, QHeaderView::ResizeToContents); // Descrição
+    header->setSectionResizeMode(4, QHeaderView::Stretch); // Tipo
+    header->setSectionResizeMode(5, QHeaderView::Stretch); // Origem
+    header->setSectionResizeMode(6, QHeaderView::Stretch); // Destino
+    header->setSectionResizeMode(7, QHeaderView::ResizeToContents); // Categoria
+    // visualizacao = 1;
 }
 
 void MovimentacoesWidget::inserirMovimentacao() {
@@ -132,4 +149,21 @@ void MovimentacoesWidget::on_btnExcluir_clicked()
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
 }
+
+// void MovimentacoesWidget::on_btnToggleVisualizacao_clicked()
+// {
+//     switch(visualizacao)
+//     {
+//     case 1:
+//         ui->btnToggleVisualizacao->setText("Ajustar para Conteúdo");
+//         ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//         visualizacao = 2;
+//         break;
+//     case 2:
+//         ui->btnToggleVisualizacao->setText("Encaixar na Janela");
+//         ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+//         visualizacao = 1;
+//         break;
+//     }
+// }
 

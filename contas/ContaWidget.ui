@@ -25,114 +25,102 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>301</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
-    </property>
-    <item>
-     <layout class="QFormLayout" name="layFormulario">
-      <property name="formAlignment">
-       <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-      </property>
-      <property name="horizontalSpacing">
-       <number>10</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>10</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lblNome">
-        <property name="text">
-         <string>Conta:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="edtNome"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="lblBanco">
-        <property name="text">
-         <string>Banco:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="edtBanco"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="lblSaldoInicial">
-        <property name="text">
-         <string>Saldo Inicial:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QDoubleSpinBox" name="spnSaldoInicial"/>
-      </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="chkAtiva">
-        <property name="text">
-         <string>Conta Ativa</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Tipo:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QComboBox" name="cmbTipo">
-        <property name="placeholderText">
-         <string>...</string>
-        </property>
-        <item>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="layPrincipal" stretch="0">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SizeConstraint::SetMaximumSize</enum>
+     </property>
+     <item>
+      <layout class="QFormLayout" name="layFormulario">
+       <property name="formAlignment">
+        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+       </property>
+       <property name="horizontalSpacing">
+        <number>10</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblNome">
          <property name="text">
-          <string>Corrente</string>
+          <string>Conta:</string>
          </property>
-        </item>
-        <item>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="edtNome"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblBanco">
          <property name="text">
-          <string>Investimento</string>
+          <string>Banco:</string>
          </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QDialogButtonBox" name="bbConta">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>220</y>
-     <width>301</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
-   </property>
-  </widget>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="edtBanco"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblSaldoInicial">
+         <property name="text">
+          <string>Saldo Inicial:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="spnSaldoInicial"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QCheckBox" name="chkAtiva">
+         <property name="text">
+          <string>Conta Ativa</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Tipo:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="cmbTipo">
+         <property name="placeholderText">
+          <string>...</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Corrente</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Investimento</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="bbConta">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

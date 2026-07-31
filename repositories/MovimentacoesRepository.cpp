@@ -207,3 +207,24 @@ bool MovimentacoesRepository::remover(int id)
     }
     return true;
 }
+
+int MovimentacoesRepository::contar()
+{
+    QSqlQuery query(Database::instance().db());
+
+    int total {};
+
+    if (!query.exec(R"(
+        SELECT COUNT(*) FROM movimentacoes
+    )"))
+    {
+        m_lastError = query.lastError().text();
+        return -1;
+    }
+    if (query.next())
+    {
+        total = query.value(0).toInt();
+        return total;
+    }
+    return 0;
+}

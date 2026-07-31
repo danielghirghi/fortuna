@@ -13,6 +13,7 @@ public:
     bool inserir(const Categoria &categoria);
     bool atualizar(const Categoria &categoria);
     bool remover(int id);
+    int contar();
 };
 
 
