@@ -25,5 +25,13 @@ private:
 
     QSqlDatabase m_db;
     static const QString CONNECTION_NAME;
+
+    bool inicializarBanco();
+    int obterVersao();
+    void definirVersao(int versao);
+    bool criarBanco();
+    //void atualizarBanco();
+    bool executarArquivo(QString path);
+    QStringList separarComandosSQL(const QString &sql);
 };
 #endif // DATABASE_H

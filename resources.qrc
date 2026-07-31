@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/sql/schema.sql</file>
+        <file>resources/sql/views.sql</file>
+        <file>resources/sql/triggers.sql</file>
+    </qresource>
+</RCC>
