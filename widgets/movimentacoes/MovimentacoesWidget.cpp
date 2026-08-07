@@ -6,10 +6,10 @@
 #include "MovimentacoesWidget.h"
 #include "ui_MovimentacoesWidget.h"
 
-#include "../repositories/MovimentacoesRepository.h"
-#include "MovimentacaoWidget.h"
+#include "../../repositories/MovimentacoesRepository.h"
+#include "../../dialogs/movimentacoes/MovimentacaoWidget.h"
 
-#include "../models/Format.h"
+#include "../../models/Format.h"
 
 MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : BaseWidget(parent)
     , ui(new Ui::MovimentacoesWidget){

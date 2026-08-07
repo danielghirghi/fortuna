@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "../models/Conta.h"
+#include "../../models/Conta.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ContaWidget; }

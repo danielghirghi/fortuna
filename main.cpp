@@ -9,8 +9,8 @@
 #include <QFile>
 #include <QDir>
 
-#include "database/Database.h"
-#include "config/configmanager.h"
+#include "core/database/Database.h"
+#include "core/config/configmanager.h"
 
 int main(int argc, char *argv[])
 {

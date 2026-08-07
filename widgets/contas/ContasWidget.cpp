@@ -1,7 +1,7 @@
 #include "ContasWidget.h"
 #include "ui_ContasWidget.h"
-#include "ContaWidget.h"
-#include "../repositories/ContasRepository.h"
+#include "../../dialogs/contas/ContaWidget.h"
+#include "../../repositories/ContasRepository.h"
 
 #include <QSqlQuery>
 

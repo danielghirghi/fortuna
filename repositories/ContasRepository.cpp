@@ -3,7 +3,7 @@
 #include <qsqlerror.h>
 #include <qsqlquery.h>
 
-#include "../database/Database.h"
+#include "../core/database/Database.h"
 
 QString ContasRepository::lastError(){ return m_lastError; }
 

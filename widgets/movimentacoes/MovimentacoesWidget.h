@@ -1,7 +1,7 @@
 #ifndef MOVIMENTACOESWIDGET_H
 #define MOVIMENTACOESWIDGET_H
 
-#include "../models/BaseWidget.h"
+#include "../BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MovimentacoesWidget; }

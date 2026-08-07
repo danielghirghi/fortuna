@@ -28,56 +28,60 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         mainwindow.ui
-        database/Database.h
-        database/Database.cpp
 
-        categorias/CategoriasWidget.cpp
-        categorias/CategoriasWidget.h
-        categorias/CategoriasWidget.ui
-        categorias/CategoriaWidget.h
-        categorias/CategoriaWidget.cpp
-        categorias/CategoriaWidget.ui
+        widgets/categorias/CategoriasWidget.cpp
+        widgets/categorias/CategoriasWidget.h
+        widgets/categorias/CategoriasWidget.ui
+        dialogs/categorias/CategoriaWidget.h
+        dialogs/categorias/CategoriaWidget.cpp
+        dialogs/categorias/CategoriaWidget.ui
         models/Categoria.h
         repositories/CategoriasRepository.h
         repositories/CategoriasRepository.cpp
 
-        contas/ContasWidget.cpp
-        contas/ContasWidget.h
-        contas/ContasWidget.ui
-        contas/ContaWidget.h
-        contas/ContaWidget.cpp
-        contas/ContaWidget.ui
+        widgets/contas/ContasWidget.cpp
+        widgets/contas/ContasWidget.h
+        widgets/contas/ContasWidget.ui
+        dialogs/contas/ContaWidget.h
+        dialogs/contas/ContaWidget.cpp
+        dialogs/contas/ContaWidget.ui
         models/Conta.h
         repositories/ContasRepository.h
         repositories/ContasRepository.cpp
 
-        tags/TagsWidget.h
-        tags/TagsWidget.cpp
-        tags/TagsWidget.ui
-        tags/TagWidget.h
-        tags/TagWidget.cpp
-        tags/TagWidget.ui
+        widgets/tags/TagsWidget.h
+        widgets/tags/TagsWidget.cpp
+        widgets/tags/TagsWidget.ui
+        dialogs/tags/TagWidget.h
+        dialogs/tags/TagWidget.cpp
+        dialogs/tags/TagWidget.ui
         models/Tag.h
         repositories/TagsRepository.h
         repositories/TagsRepository.cpp
 
-        movimentacoes/MovimentacoesWidget.ui
-        movimentacoes/MovimentacoesWidget.cpp
-        movimentacoes/MovimentacoesWidget.h
-        movimentacoes/MovimentacaoWidget.ui
-        movimentacoes/MovimentacaoWidget.cpp
-        movimentacoes/MovimentacaoWidget.h
+        widgets/movimentacoes/MovimentacoesWidget.ui
+        widgets/movimentacoes/MovimentacoesWidget.cpp
+        widgets/movimentacoes/MovimentacoesWidget.h
+        dialogs/movimentacoes/MovimentacaoWidget.ui
+        dialogs/movimentacoes/MovimentacaoWidget.cpp
+        dialogs/movimentacoes/MovimentacaoWidget.h
         models/Movimentacao.h
-        models/Movimentacao.cpp
+
         repositories/MovimentacoesRepository.h
         repositories/MovimentacoesRepository.cpp
 
         resources.qrc
         models/Format.h
-        models/Format.cpp
-        config/configmanager.h
-        config/configmanager.cpp
-        models/BaseWidget.h
+
+        widgets/BaseWidget.h
+
+        core/config/configmanager.h
+        core/config/configmanager.cpp
+        core/database/Database.h
+        core/database/Database.cpp
+
+        config/localsettings.example.json
+        config/localsettings.json
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET fortuna APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -1,10 +1,10 @@
 #include "MovimentacaoWidget.h"
 #include "ui_MovimentacaoWidget.h"
 
-#include "../repositories/MovimentacoesRepository.h"
+#include "../../repositories/MovimentacoesRepository.h"
 
-#include "../repositories/ContasRepository.h"
-#include "../repositories/CategoriasRepository.h"
+#include "../../repositories/ContasRepository.h"
+#include "../../repositories/CategoriasRepository.h"
 
 #include <qmenu.h>
 #include <qpushbutton.h>

@@ -10,6 +10,7 @@ public:
     static QString databasePath();
     static void setDatabasePath(const QString& path);
     static QString defaultDatabasePath();
+    static QString testDatabaseFolder();
 
 private:
     static QSettings settings();

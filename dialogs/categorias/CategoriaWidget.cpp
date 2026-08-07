@@ -1,7 +1,7 @@
 #include "CategoriaWidget.h"
 #include "ui_CategoriaWidget.h"
 
-#include "../repositories/CategoriasRepository.h"
+#include "../../repositories/CategoriasRepository.h"
 
 #include <qpushbutton.h>
 #include <qsqlerror.h>

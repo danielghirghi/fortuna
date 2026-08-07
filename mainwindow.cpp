@@ -9,13 +9,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "database/Database.h"
-#include "config/configmanager.h"
+#include "core/database/Database.h"
+#include "core/config/configmanager.h"
 
-#include "contas/ContasWidget.h"
-#include "categorias/CategoriasWidget.h"
-#include "tags/TagsWidget.h"
-#include "movimentacoes/MovimentacoesWidget.h"
+#include "widgets/contas/ContasWidget.h"
+#include "widgets/categorias/CategoriasWidget.h"
+#include "widgets/tags/TagsWidget.h"
+#include "widgets/movimentacoes/MovimentacoesWidget.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -33,10 +33,11 @@ void MainWindow::on_btnMovimentacoes_clicked(){ abrirJanela(m_movimentacoes); }
 
 void MainWindow::on_actionAbrirArquivo_triggered()
 {
+    QString pastaInicial = ConfigManager::testDatabaseFolder();
     QString filePath = QFileDialog::getOpenFileName(
         this,
         tr("Selecionar banco"),
-        QDir::homePath(),
+        pastaInicial,
         tr("Banco de dados (*.db)")
         );
 

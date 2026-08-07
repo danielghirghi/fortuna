@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "../models/Movimentacao.h"
+#include "../../models/Movimentacao.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MovimentacaoWidget; }

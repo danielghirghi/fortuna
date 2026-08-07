@@ -3,7 +3,7 @@
 
 #include <QDialog>
 
-#include "../models/Categoria.h"
+#include "../../models/Categoria.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CategoriaWidget; }

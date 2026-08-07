@@ -7,7 +7,10 @@
 class Format
 {
 public:
-    static QString data(const QDate &data);
+    static QString data(const QDate &data)
+    {
+        return QLocale().toString(data, QLocale::ShortFormat);
+    }
 };
 
 #endif // FORMAT_H

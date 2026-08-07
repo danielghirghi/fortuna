@@ -3,10 +3,10 @@
 
 #include <QMainWindow>
 
-#include "contas/ContasWidget.h"
-#include "categorias/CategoriasWidget.h"
-#include "tags/TagsWidget.h"
-#include "movimentacoes/MovimentacoesWidget.h"
+#include "widgets/contas/ContasWidget.h"
+#include "widgets/categorias/CategoriasWidget.h"
+#include "widgets/tags/TagsWidget.h"
+#include "widgets/movimentacoes/MovimentacoesWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

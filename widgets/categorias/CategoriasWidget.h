@@ -1,7 +1,7 @@
 #ifndef CATEGORIASWIDGET_H
 #define CATEGORIASWIDGET_H
 
-#include "../models/BaseWidget.h"
+#include "../BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CategoriasWidget; }

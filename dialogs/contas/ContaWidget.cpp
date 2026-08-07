@@ -1,7 +1,7 @@
 #include "ContaWidget.h"
 #include "ui_ContaWidget.h"
 
-#include "../repositories/ContasRepository.h"
+#include "../../repositories/ContasRepository.h"
 
 #include <qpushbutton.h>
 #include <qsqlerror.h>

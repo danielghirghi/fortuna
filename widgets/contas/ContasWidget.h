@@ -1,7 +1,7 @@
 #ifndef CONTASWIDGET_H
 #define CONTASWIDGET_H
 
-#include "../models/BaseWidget.h"
+#include "../BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ContasWidget; }
