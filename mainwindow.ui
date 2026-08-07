@@ -132,29 +132,43 @@
        </layout>
       </item>
       <item>
-       <widget class="QLabel" name="lblFortuna">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Times New Roman</family>
-          <pointsize>40</pointsize>
-          <italic>false</italic>
-          <bold>false</bold>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="text">
-         <string>Fortuna</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
+       <layout class="QGridLayout" name="layInfo">
+        <item row="0" column="0">
+         <widget class="QLabel" name="lblFortuna">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>40</pointsize>
+            <italic>false</italic>
+            <bold>false</bold>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Fortuna</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTableView" name="tblInfo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -169,8 +183,20 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuBancoDeDados">
+    <property name="title">
+     <string>Banco de dados</string>
+    </property>
+    <addaction name="actionAbrirArquivo"/>
+   </widget>
+   <addaction name="menuBancoDeDados"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbrirArquivo">
+   <property name="text">
+    <string>Abrir Arquivo</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

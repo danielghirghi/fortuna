@@ -26,6 +26,9 @@ private slots:
     void on_btnCategorias_clicked();
     void on_btnTags_clicked();
     void on_btnMovimentacoes_clicked();
+    void on_actionAbrirArquivo_triggered();
+    void atualizarInterface();
+    void tabelaInfo();
 
 private:
 	Ui::MainWindow *ui;
@@ -45,6 +48,7 @@ private:
         janela->show();
         janela->raise();
         janela->activateWindow();
+        tabelaInfo();
     };
 };
 #endif // MAINWINDOW_H

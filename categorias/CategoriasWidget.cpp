@@ -9,7 +9,7 @@
 #include <QSqlError>
 #include <QTableWidgetItem>
 
-CategoriasWidget::CategoriasWidget(QWidget *parent) : QWidget(parent)
+CategoriasWidget::CategoriasWidget(QWidget *parent) : BaseWidget(parent)
     , ui(new Ui::CategoriasWidget)
 {
     ui->setupUi(this);
@@ -110,4 +110,9 @@ void CategoriasWidget::on_btnExcluir_clicked()
     dlg->setModo(CategoriaWidget::Modo::Excluir);
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarCategorias(); }
+}
+
+void CategoriasWidget::refresh()
+{
+    carregarCategorias();
 }

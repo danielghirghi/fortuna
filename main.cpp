@@ -5,7 +5,12 @@
 #include <QTranslator>
 #include <QMessageBox>
 
+#include <QStandardPaths>
+#include <QFile>
+#include <QDir>
+
 #include "database/Database.h"
+#include "config/configmanager.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +31,16 @@ int main(int argc, char *argv[])
     if (!Database::instance().connect()) {
         QMessageBox::critical(nullptr, "Erro", "Não foi possível conectar ao banco de dados.");
         return -1;
+    }
+
+    QString banco = ConfigManager::databasePath();
+
+    bool bancoNovo = !QFile::exists(banco);
+
+    if (Database::instance().connect(banco))
+    {
+        if (bancoNovo)
+            Database::instance().criarBanco();
     }
 
     MainWindow w;

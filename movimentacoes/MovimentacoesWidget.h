@@ -1,19 +1,20 @@
 #ifndef MOVIMENTACOESWIDGET_H
 #define MOVIMENTACOESWIDGET_H
 
-#include <QWidget>
+#include "../models/BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MovimentacoesWidget; }
 QT_END_NAMESPACE
 
-class MovimentacoesWidget : public QWidget
+class MovimentacoesWidget : public BaseWidget
 {
     Q_OBJECT
 
 public:
     explicit MovimentacoesWidget(QWidget *parent = nullptr);
     ~MovimentacoesWidget();
+    void refresh();
 
 private slots:
     void carregarMovimentacoes();

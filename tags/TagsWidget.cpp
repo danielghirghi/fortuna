@@ -9,7 +9,7 @@
 #include <QSqlError>
 #include <QTableWidgetItem>
 
-TagsWidget::TagsWidget(QWidget *parent) : QWidget(parent)
+TagsWidget::TagsWidget(QWidget *parent) : BaseWidget(parent)
     , ui(new Ui::TagsWidget)
 {
     ui->setupUi(this);
@@ -107,4 +107,9 @@ void TagsWidget::on_btnExcluir_clicked()
     dlg->setModo(TagWidget::Modo::Excluir);
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarTags(); }
+}
+
+void TagsWidget::refresh()
+{
+    carregarTags();
 }

@@ -1,4 +1,5 @@
 #include "Database.h"
+#include "../config/configmanager.h"
 
 #include <QDebug>
 #include <QSqlError>
@@ -22,45 +23,56 @@ Database& Database::instance()
     return instance;
 }
 
-bool Database::connect()
+Database::Database()
 {
-    // Encontra o caminho padrão da base de dados, a depender do OS:
-    // Linux: ~/.local/share/fortuna/
-    // Windows: AppData\Local\Fortuna\ ou AppData\Roaming\Fortuna\
-    // macOS: ~/Library/Application Support/Fortuna/
-    QString pastaDados = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    QDir().mkpath(pastaDados);
-    QString caminhoBanco = pastaDados + "/finance.db";
+    m_db = QSqlDatabase::addDatabase("QSQLITE");
+}
 
-    bool bancoNovo = !QFile::exists(caminhoBanco);
-
-    // Evita recriar a conexão se já existir com esse nome
-    if (QSqlDatabase::contains(CONNECTION_NAME)) {
+bool Database::connect(const QString &path)
+{
+    if (QSqlDatabase::contains(CONNECTION_NAME))
         m_db = QSqlDatabase::database(CONNECTION_NAME);
-    } else {
+    else
         m_db = QSqlDatabase::addDatabase("QSQLITE", CONNECTION_NAME);
-        m_db.setDatabaseName(caminhoBanco);
-    }
 
-    if (!m_db.open()) {
-        qWarning() << "Erro ao abrir o banco de dados:" << m_db.lastError().text();
+    if (m_db.isOpen())
+        m_db.close();
+
+    m_db.setDatabaseName(path);
+
+    if (!m_db.open())
+    {
+        qWarning() << m_db.lastError().text();
         return false;
     }
 
-    if (bancoNovo)
+    m_databasePath = path;
+
+    return true;
+}
+
+bool Database::connect()
+{
+    QString path = ConfigManager::databasePath();
+
+    if (path.isEmpty())
+    {
+        QString pasta = QStandardPaths::writableLocation(
+            QStandardPaths::AppDataLocation);
+
+        QDir().mkpath(pasta);
+
+        path = pasta + "/finance.db";
+    }
+
+    bool novoBanco = !QFile::exists(path);
+
+    bool ok = connect(path);
+
+    if (ok && novoBanco)
         criarBanco();
 
-    if (m_db.isOpen())
-        return true;
-
-    // if (!QFile::exists(caminhoBanco)) {
-    //     qWarning() << "Arquivo de banco de dados não encontrado:" << caminhoBanco;
-    //     // return false;
-    //     return inicializarBanco();
-    // }
-
-    qDebug() << "Conectado ao banco de dados:" << caminhoBanco;
-    return true;
+    return ok;
 }
 
 void Database::disconnect()
@@ -77,6 +89,11 @@ bool Database::isOpen() const
 QSqlDatabase Database::db() const
 {
     return m_db;
+}
+
+QString Database::databasePath() const
+{
+    return m_databasePath;
 }
 
 bool Database::inicializarBanco()

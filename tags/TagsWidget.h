@@ -1,19 +1,20 @@
 #ifndef TAGSWIDGET_H
 #define TAGSWIDGET_H
 
-#include <QWidget>
+#include "../models/BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class TagsWidget; }
 QT_END_NAMESPACE
 
-class TagsWidget : public QWidget
+class TagsWidget : public BaseWidget
 {
     Q_OBJECT
 
 public:
     explicit TagsWidget(QWidget *parent = nullptr);
     ~TagsWidget();
+    void refresh();
 
 private slots:
     void carregarTags();

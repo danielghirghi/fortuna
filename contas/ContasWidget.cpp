@@ -9,7 +9,7 @@
 #include <QSqlError>
 #include <QTableWidgetItem>
 
-ContasWidget::ContasWidget(QWidget *parent) : QWidget(parent)
+ContasWidget::ContasWidget(QWidget *parent) : BaseWidget(parent)
     , ui(new Ui::ContasWidget)
 {
     ui->setupUi(this);
@@ -111,5 +111,10 @@ void ContasWidget::on_btnExcluir_clicked()
     dlg->setModo(ContaWidget::Modo::Excluir);
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarContas(); }
+}
+
+void ContasWidget::refresh()
+{
+    carregarContas();
 }
 

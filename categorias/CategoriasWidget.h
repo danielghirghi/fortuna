@@ -1,19 +1,20 @@
 #ifndef CATEGORIASWIDGET_H
 #define CATEGORIASWIDGET_H
 
-#include <QWidget>
+#include "../models/BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class CategoriasWidget; }
 QT_END_NAMESPACE
 
-class CategoriasWidget : public QWidget
+class CategoriasWidget : public BaseWidget
 {
     Q_OBJECT
 
 public:
     explicit CategoriasWidget(QWidget *parent = nullptr);
     ~CategoriasWidget();
+    void refresh();
 
 private slots:
     void carregarCategorias();

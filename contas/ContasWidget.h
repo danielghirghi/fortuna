@@ -1,19 +1,20 @@
 #ifndef CONTASWIDGET_H
 #define CONTASWIDGET_H
 
-#include <QWidget>
+#include "../models/BaseWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ContasWidget; }
 QT_END_NAMESPACE
 
-class ContasWidget : public QWidget
+class ContasWidget : public BaseWidget
 {
     Q_OBJECT
 
 public:
     explicit ContasWidget(QWidget *parent = nullptr);
     ~ContasWidget();
+    void refresh() override;
 
 private slots:
     void carregarContas();

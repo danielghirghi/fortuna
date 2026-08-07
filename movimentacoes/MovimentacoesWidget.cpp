@@ -11,7 +11,7 @@
 
 #include "../models/Format.h"
 
-MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : QWidget(parent)
+MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : BaseWidget(parent)
     , ui(new Ui::MovimentacoesWidget){
     ui->setupUi(this);
 
@@ -117,5 +117,10 @@ void MovimentacoesWidget::on_btnExcluir_clicked()
     dlg->setModo(Modo::Excluir);
     dlg->setId(id);
     if (dlg->exec() == QDialog::Accepted) { carregarMovimentacoes(); }
+}
+
+void MovimentacoesWidget::refresh()
+{
+    carregarMovimentacoes();
 }
 
