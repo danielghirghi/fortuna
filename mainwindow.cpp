@@ -52,7 +52,9 @@ void MainWindow::on_actionAbrirArquivo_triggered()
         return;
     }
 
-    ConfigManager::setDatabasePath(filePath);
+    // Para deixar a escolha do banco persistir:
+    //ConfigManager::setDatabasePath(filePath);
+    // TODO: Adicionar opção para usuário escolher se o banco selecionado vai ser o padrão
 
     atualizarInterface();
 }

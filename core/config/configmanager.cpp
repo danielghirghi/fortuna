@@ -29,7 +29,6 @@ QString ConfigManager::databasePath()
 void ConfigManager::setDatabasePath(const QString& path)
 {
     QSettings settings("Daniel", "Fortuna");
-
     settings.setValue("database/path", path);
 }
 

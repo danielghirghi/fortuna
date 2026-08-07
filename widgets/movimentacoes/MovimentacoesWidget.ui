@@ -38,6 +38,13 @@
         <widget class="QLineEdit" name="edtPesquisar"/>
        </item>
        <item>
+        <widget class="QToolButton" name="btnLimpar">
+         <property name="text">
+          <string>❌</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QToolButton" name="btnPesquisar">
          <property name="text">
           <string>🔍</string>
@@ -148,7 +155,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="laybottom" stretch="1,0">
+      <layout class="QHBoxLayout" name="laybottom" stretch="1">
        <item>
         <widget class="QLabel" name="lblQuantidade">
          <property name="text">
@@ -156,13 +163,6 @@
          </property>
         </widget>
        </item>
-       <!--item>
-        <widget class="QPushButton" name="btnToggleVisualizacao">
-         <property name="text">
-          <string>Encaixar na Janela</string>
-         </property>
-        </widget>
-       </item-->
       </layout>
      </item>
     </layout>

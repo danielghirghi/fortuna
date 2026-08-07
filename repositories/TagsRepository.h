@@ -14,6 +14,7 @@ public:
     bool atualizar(const Tag &tag);
     bool remover(int id);
     int contar();
+    QList<Tag> pesquisar(QString busca);
 };
 
 #endif // TAGSREPOSITORY_H

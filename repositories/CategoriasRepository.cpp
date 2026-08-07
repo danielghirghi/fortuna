@@ -162,3 +162,52 @@ int CategoriasRepository::contar()
     return 0;
 }
 
+
+QList<Categoria> CategoriasRepository::pesquisar(QString busca)
+{
+    QList<Categoria> categorias;
+    QSqlQuery query(Database::instance().db());
+
+    query.prepare(R"(
+        SELECT
+            id,
+            nome,
+            grupo,
+            tipo,
+            ativo
+        FROM categorias
+        WHERE nome LIKE :busca
+           OR grupo LIKE :busca
+           OR tipo LIKE :busca
+        ORDER BY nome
+    )");
+    // LIKE no SQLite é case-insensitive EXCETO se tiver acento:
+    // a = A ; porém ã != Ã
+    // TODO: implementar busca accent-insensitive
+
+    QString buscaComCuringa = "%" + busca + "%";
+    query.bindValue(":busca", buscaComCuringa);
+
+    if (!query.exec())
+    {
+        m_lastError = query.lastError().text();
+        return categorias;
+    }
+
+    while (query.next())
+    {
+        Categoria categoria;
+
+        categoria.id    = query.value("id").toInt();
+        categoria.nome  = query.value("nome").toString();
+        categoria.grupo = query.value("grupo").toString();
+        categoria.tipo  = query.value("tipo").toString();
+        categoria.ativo = query.value("ativo").toBool();
+
+        categorias.append(categoria);
+    }
+    return categorias;
+}
+
+
+

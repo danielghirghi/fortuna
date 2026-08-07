@@ -14,6 +14,7 @@ public:
     bool atualizar(const Movimentacao &conta);
     bool remover(int id);
     int contar();
+    QList<Movimentacao> pesquisar(QString busca);
 };
 
 #endif // MOVIMENTACOESREPOSITORY_H

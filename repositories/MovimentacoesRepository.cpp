@@ -228,3 +228,59 @@ int MovimentacoesRepository::contar()
     }
     return 0;
 }
+
+QList<Movimentacao> MovimentacoesRepository::pesquisar(QString busca)
+{
+    QList<Movimentacao> movimentacoes;
+    QSqlQuery query(Database::instance().db());
+
+    query.prepare(R"(
+        SELECT
+            m.id,
+            m.data,
+            m.descricao,
+            co.nome AS conta_origem,
+            cd.nome AS conta_destino,
+            cat.nome AS categoria,
+            m.valor,
+            m.tipo AS tipo
+        FROM movimentacoes m
+        LEFT JOIN contas co ON co.id = m.conta_origem_id
+        LEFT JOIN contas cd ON cd.id = m.conta_destino_id
+        LEFT JOIN categorias cat ON cat.id = m.categoria_id
+        WHERE descricao LIKE :busca
+           OR cat.nome LIKE :busca
+           OR co.nome LIKE :busca
+           OR cd.nome LIKE :busca
+        ORDER BY m.data DESC
+    )");
+    // LIKE no SQLite é case-insensitive EXCETO se tiver acento:
+    // a = A ; porém ã != Ã
+    // TODO: implementar busca accent-insensitive
+
+    QString buscaComCuringa = "%" + busca + "%";
+
+    query.bindValue(":busca", buscaComCuringa);
+
+    if (!query.exec())
+    {
+        m_lastError = query.lastError().text();
+        return movimentacoes;
+    }
+
+    while (query.next())
+    {
+        Movimentacao movimentacao;
+        movimentacao.id        = query.value("id").toInt();
+        movimentacao.data      = query.value("data").toDate();
+        movimentacao.origem    = query.value("conta_origem").toString();
+        movimentacao.destino   = query.value("conta_destino").toString();
+        movimentacao.categoria = query.value("categoria").toString();
+        movimentacao.descricao = query.value("descricao").toString();
+        movimentacao.setTipo(query.value("tipo").toString());
+        movimentacao.valor     = query.value("valor").toDouble();
+
+        movimentacoes.append(movimentacao);
+    }
+    return movimentacoes;
+}

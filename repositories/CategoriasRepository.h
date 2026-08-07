@@ -14,6 +14,7 @@ public:
     bool atualizar(const Categoria &categoria);
     bool remover(int id);
     int contar();
+    QList <Categoria> pesquisar(QString busca);
 };
 
 

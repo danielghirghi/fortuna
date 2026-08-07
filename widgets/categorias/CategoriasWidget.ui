@@ -35,6 +35,13 @@
         <widget class="QLineEdit" name="edtPesquisar"/>
        </item>
        <item>
+        <widget class="QToolButton" name="btnLimpar">
+         <property name="text">
+          <string>❌</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QToolButton" name="btnPesquisar">
          <property name="text">
           <string>🔍</string>

@@ -14,6 +14,7 @@ public:
     bool atualizar(const Conta &conta);
     bool remover(int id);
     int contar();
+    QList <Conta> pesquisar(QString busca);
 };
 
 #endif

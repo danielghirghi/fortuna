@@ -21,6 +21,8 @@ private slots:
     void on_btnNova_clicked();
     void on_btnEditar_clicked();
     void on_btnExcluir_clicked();
+    void on_btnLimpar_clicked();
+    void on_btnPesquisar_clicked();
 
 private:
     Ui::CategoriasWidget *ui;

@@ -168,3 +168,52 @@ int ContasRepository::contar()
     return 0;
 }
 
+QList<Conta> ContasRepository::pesquisar(QString busca)
+{
+    QList<Conta> contas;
+    QSqlQuery query(Database::instance().db());
+
+    query.prepare(R"(
+        SELECT
+            id,
+            nome,
+            banco,
+            tipo,
+            saldo_inicial,
+            ativo
+        FROM contas
+        WHERE nome LIKE :busca
+           OR banco LIKE :busca
+           OR tipo LIKE :busca
+        ORDER BY nome
+    )");
+    // LIKE no SQLite é case-insensitive EXCETO se tiver acento:
+    // a = A ; porém ã != Ã
+    // TODO: implementar busca accent-insensitive
+
+    QString buscaComCuringa = "%" + busca + "%";
+
+    query.bindValue(":busca", buscaComCuringa);
+
+    if (!query.exec())
+    {
+        m_lastError = query.lastError().text();
+        return contas;
+    }
+
+    while (query.next())
+    {
+        Conta conta;
+
+        conta.id            = query.value("id").toInt();
+        conta.nome          = query.value("nome").toString();
+        conta.banco         = query.value("banco").toString();
+        conta.tipo          = query.value("tipo").toString();
+        conta.saldoInicial  = query.value("saldo_inicial").toDouble();
+        conta.ativo         = query.value("ativo").toBool();
+
+        contas.append(conta);
+    }
+    return contas;
+}
+

@@ -33,6 +33,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    // Arquivo do banco sempre inicia no padrão
+    ConfigManager::setDatabasePath(ConfigManager::defaultDatabasePath());
     QString banco = ConfigManager::databasePath();
 
     bool bancoNovo = !QFile::exists(banco);

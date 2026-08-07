@@ -19,6 +19,7 @@ ContasWidget::ContasWidget(QWidget *parent) : BaseWidget(parent)
 
     ui->tblContas->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tblContas->setSelectionMode(QAbstractItemView::SingleSelection);
+    connect(ui->edtPesquisar, &QLineEdit::returnPressed, this, &ContasWidget::on_btnPesquisar_clicked);
 }
 
 ContasWidget::~ContasWidget(){ delete ui; }
@@ -49,7 +50,7 @@ void ContasWidget::carregarContas()
         row++;
     }
     ui->tblContas->setColumnHidden(0, true);
-    ui->lblQuantidade->setText(QString::number(repository.contar()) + " contas");
+    ui->lblQuantidade->setText(QString::number(contas.count()) + " contas");
     ui->tblContas->verticalHeader()->setVisible(false);
     ui->tblContas->setAlternatingRowColors(true);
     ui->tblContas->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -118,3 +119,50 @@ void ContasWidget::refresh()
     carregarContas();
 }
 
+void ContasWidget::on_btnLimpar_clicked()
+{
+    ui->edtPesquisar->setText("");
+    carregarContas();
+}
+
+void ContasWidget::on_btnPesquisar_clicked()
+{
+    ui->tblContas->setRowCount(0);
+
+    QString busca = ui->edtPesquisar->text();
+
+    ContasRepository repository;
+    QList<Conta> contas = repository.pesquisar(busca);
+
+    if (!repository.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
+        return;
+    }
+
+    int row = 0;
+    for (const Conta &conta : contas)
+    {
+        ui->tblContas->insertRow(row);
+        ui->tblContas->setItem(row, 0, new QTableWidgetItem(QString::number(conta.id)));
+        ui->tblContas->setItem(row, 1, new QTableWidgetItem(conta.nome));
+        ui->tblContas->setItem(row, 2, new QTableWidgetItem(conta.tipo));
+        ui->tblContas->setItem(row, 3, new QTableWidgetItem(conta.banco));
+        ui->tblContas->setItem(row, 4, new QTableWidgetItem(QString::number(conta.saldoInicial, 'f', 2)));
+        ui->tblContas->setItem(row, 5, new QTableWidgetItem(conta.ativo ? "Sim" : "Não"));
+        row++;
+    }
+    ui->tblContas->setColumnHidden(0, true);
+    ui->lblQuantidade->setText(QString::number(contas.count()) + " contas");
+    ui->tblContas->verticalHeader()->setVisible(false);
+    ui->tblContas->setAlternatingRowColors(true);
+    ui->tblContas->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblContas->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    auto *header = ui->tblContas->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents); // ID
+    header->setSectionResizeMode(1, QHeaderView::Stretch);          // Nome
+    header->setSectionResizeMode(2, QHeaderView::ResizeToContents); // Tipo
+    header->setSectionResizeMode(3, QHeaderView::Stretch);          // Banco
+    header->setSectionResizeMode(4, QHeaderView::ResizeToContents); // Saldo
+    header->setSectionResizeMode(5, QHeaderView::ResizeToContents); // Ativa
+}

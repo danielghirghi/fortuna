@@ -153,3 +153,48 @@ int TagsRepository::contar()
     return 0;
 }
 
+QList<Tag> TagsRepository::pesquisar(QString busca)
+{
+    QList<Tag> tags;
+    QSqlQuery query(Database::instance().db());
+
+    query.prepare(R"(
+        SELECT
+            id,
+            nome,
+            cor,
+            ativo
+        FROM tags
+        WHERE nome LIKE :busca
+           OR cor LIKE :busca
+        ORDER BY nome
+    )");
+    // LIKE no SQLite é case-insensitive EXCETO se tiver acento:
+    // a = A ; porém ã != Ã
+    // TODO: implementar busca accent-insensitive
+
+    QString buscaComCuringa = "%" + busca + "%";
+
+    query.bindValue(":busca", buscaComCuringa);
+
+    if (!query.exec())
+    {
+        m_lastError = query.lastError().text();
+        return tags;
+    }
+
+    while (query.next())
+    {
+        Tag tag;
+
+        tag.id    = query.value("id").toInt();
+        tag.nome  = query.value("nome").toString();
+        tag.cor   = query.value("cor").toString();
+        tag.ativo = query.value("ativo").toBool();
+
+        tags.append(tag);
+    }
+
+    return tags;
+}
+

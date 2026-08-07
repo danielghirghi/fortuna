@@ -26,6 +26,9 @@
       <layout class="QHBoxLayout" name="layPesquisa">
        <item>
         <widget class="QLabel" name="lblPesquisar">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Pesquisar:</string>
          </property>
@@ -35,9 +38,22 @@
         <widget class="QLineEdit" name="edtPesquisar"/>
        </item>
        <item>
+        <widget class="QToolButton" name="btnLimpar">
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::EditClear"/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QToolButton" name="btnPesquisar">
          <property name="text">
-          <string>🔍</string>
+          <string>🔍Pesquisar</string>
+         </property>
+         <property name="icon">
+          <iconset theme="QIcon::ThemeIcon::EditFind"/>
          </property>
          <property name="checkable">
           <bool>false</bool>

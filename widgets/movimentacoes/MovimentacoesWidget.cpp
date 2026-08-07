@@ -21,6 +21,7 @@ MovimentacoesWidget::MovimentacoesWidget(QWidget *parent) : BaseWidget(parent)
 
     ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tblMovimentacoes->setSelectionMode(QAbstractItemView::SingleSelection);
+    connect(ui->edtPesquisar, &QLineEdit::returnPressed, this, &MovimentacoesWidget::on_btnPesquisar_clicked);
 }
 
 MovimentacoesWidget::~MovimentacoesWidget() { delete ui; }
@@ -52,7 +53,7 @@ void MovimentacoesWidget::carregarMovimentacoes()
         row++;
     }
     ui->tblMovimentacoes->setColumnHidden(0,true);
-    ui->lblQuantidade->setText(QString::number(repository.contar()) + " movimentações");
+    ui->lblQuantidade->setText(QString::number(movimentacoes.count()) + " movimentações");
     ui->tblMovimentacoes->verticalHeader()->setVisible(false);
     ui->tblMovimentacoes->setAlternatingRowColors(true);
     ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -124,3 +125,55 @@ void MovimentacoesWidget::refresh()
     carregarMovimentacoes();
 }
 
+void MovimentacoesWidget::on_btnLimpar_clicked()
+{
+    ui->edtPesquisar->setText("");
+    carregarMovimentacoes();
+}
+
+void MovimentacoesWidget::on_btnPesquisar_clicked()
+{
+    ui->tblMovimentacoes->setRowCount(0);
+
+    QString busca = ui->edtPesquisar->text();
+
+    MovimentacoesRepository repository;
+    QList<Movimentacao> movimentacoes = repository.pesquisar(busca);
+
+    if (!repository.lastError().isEmpty())
+    {
+        QMessageBox::warning( this, "Erro", repository.lastError());
+        return;
+    }
+
+
+    int row = 0;
+    for (const Movimentacao &movimentacao : movimentacoes) {
+        ui->tblMovimentacoes->insertRow(row);
+        ui->tblMovimentacoes->setItem(row, 0, new QTableWidgetItem(QString::number(movimentacao.id)));
+        ui->tblMovimentacoes->setItem(row, 1, new QTableWidgetItem(Format::data(movimentacao.data)));
+        ui->tblMovimentacoes->setItem(row, 2, new QTableWidgetItem(QString::number(movimentacao.valor,'f', 2)));
+        ui->tblMovimentacoes->setItem(row, 3, new QTableWidgetItem(movimentacao.descricao));
+        ui->tblMovimentacoes->setItem(row, 4, new QTableWidgetItem(movimentacao.getTipo()));
+        ui->tblMovimentacoes->setItem(row, 5, new QTableWidgetItem(movimentacao.origem));
+        ui->tblMovimentacoes->setItem(row, 6, new QTableWidgetItem(movimentacao.destino));
+        ui->tblMovimentacoes->setItem(row, 7, new QTableWidgetItem(movimentacao.categoria));
+        row++;
+    }
+    ui->tblMovimentacoes->setColumnHidden(0,true);
+    ui->lblQuantidade->setText(QString::number(movimentacoes.count()) + " movimentações");
+    ui->tblMovimentacoes->verticalHeader()->setVisible(false);
+    ui->tblMovimentacoes->setAlternatingRowColors(true);
+    ui->tblMovimentacoes->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tblMovimentacoes->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tblMovimentacoes->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    auto *header = ui->tblMovimentacoes->horizontalHeader();
+    header->setSectionResizeMode(0, QHeaderView::ResizeToContents); // ID
+    header->setSectionResizeMode(1, QHeaderView::Stretch);          // Data
+    header->setSectionResizeMode(2, QHeaderView::ResizeToContents); // Valor
+    header->setSectionResizeMode(3, QHeaderView::ResizeToContents); // Descrição
+    header->setSectionResizeMode(4, QHeaderView::Stretch); // Tipo
+    header->setSectionResizeMode(5, QHeaderView::Stretch); // Origem
+    header->setSectionResizeMode(6, QHeaderView::Stretch); // Destino
+    header->setSectionResizeMode(7, QHeaderView::ResizeToContents); // Categoria
+}
