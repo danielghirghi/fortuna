@@ -20,7 +20,7 @@
 core
 !core/
 tags
-!/tags/
+!/*/tags/
 .DS_Store
 .directory
 *.debug
